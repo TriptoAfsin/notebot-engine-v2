@@ -1,21 +1,63 @@
-import express, { Express, Request, Response , Application } from 'express';
-import dotenv from 'dotenv';
-import { getErrorMessage } from 'constants/errors';
+import bodyParser from "body-parser";
+import { db } from "config/db";
+import cors from "cors";
+import dotenv from "dotenv";
+import express, { Application } from "express";
+import appRoutes from "routes/appRoutes";
+import chatBotRoutes from "routes/chatbotRoutes";
+import homePageRoutes from "routes/homepageRoutes";
 
-//For env File 
+//For env File
 dotenv.config();
 
-const app: Application = express();
-const port = process.env.PORT || 8000;
+const setupMiddlewares = async (app: Application) => {
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(
+    cors({
+      origin: "*",
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    })
+  );
+};
 
-app.get('/', (req: Request, res: Response) => {
-  res.status(200).json({message: 'Welcome to Express & TypeScript Server'})
-});
+const setupViewEngine = async (app: Application) => {
+  app.use(express.static("./src/public")); //static folder
+  app.set("view engine", "ejs");
+  app.set("views", "./src/views");
+};
 
-app.get('/error', (req: Request, res: Response) => {
-  res.status(400).json({message: getErrorMessage[400]})
-});
+const setupRoutes = (app: Application) => {
+  // app.use('/api/v1', appRoute);
+  app.use("", homePageRoutes);
+  app.use("", chatBotRoutes);
+  app.use("", appRoutes);
+};
 
-app.listen(port, () => {
-  console.log(`listening at http://localhost:${port}`);
-});
+const setupDb = async () => {
+  db.connect(err => {
+    let dbConnection;
+    if (err) {
+      dbConnection = false;
+      return console.error("🔴 Error occurred while connecting to DB", err);
+    }
+    dbConnection = true;
+    console.log("🟢 Connected to DB");
+  });
+};
+
+const initServer = async () => {
+  const app: Application = express();
+
+  await setupMiddlewares(app);
+  await setupDb();
+  await setupViewEngine(app);
+  await setupRoutes(app);
+  const port = process.env.PORT || 8000;
+
+  app.listen(port, () => {
+    console.log(`listening at http://localhost:${port}`);
+  });
+};
+
+initServer();

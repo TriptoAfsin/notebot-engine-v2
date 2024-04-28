@@ -1,0 +1,1 @@
+export const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
