@@ -157,10 +157,13 @@ const appController = {
       }
 
       const response = await fetch(
-        `https://api.cloudflare.com/client/v4/accounts/${AUTO_RAG_TOKEN}/autorag/search`,
+        "https://api.cloudflare.com/client/v4/accounts/4e38392b49ae108574f34eed09e2427b/autorag/rags/tex-gpt-new/ai-search",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${AUTO_RAG_TOKEN}`,
+          },
           body: JSON.stringify({ query }),
         }
       );
