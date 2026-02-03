@@ -168,8 +168,13 @@ const appController = {
         }
       );
 
-      const data = await response.json();
-      res.json({ success: true, result: data });
+      const data: any = await response.json();
+      // Unwrap Cloudflare's envelope so FE gets { success, result: { response, data } }
+      if (data.success && data.result) {
+        res.json({ success: true, result: data.result });
+      } else {
+        res.json({ success: false, error: data.errors?.[0]?.message || "AutoRAG request failed" });
+      }
     } catch (err: any) {
       res.status(500).json({ success: false, error: err.message });
     }
