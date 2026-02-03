@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { Application } from "express";
+import swaggerUi from "swagger-ui-express";
 import appRoutes from "routes/app.routes";
 import compatRoutes from "routes/compat.routes";
 import chatBotRoutes from "routes/chatbot.routes";
@@ -9,6 +10,7 @@ import homePageRoutes from "routes/homepage.routes";
 import { connectDb } from "config/db";
 import { connectRedis } from "config/redis";
 import { errorHandler } from "middlewares/error-handler";
+import { swaggerSpec } from "config/swagger";
 
 //For env File
 dotenv.config();
@@ -31,6 +33,7 @@ const setupViewEngine = async (app: Application) => {
 };
 
 const setupRoutes = (app: Application) => {
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   app.use("", homePageRoutes);
   app.use("", chatBotRoutes);
   app.use("", appRoutes);
