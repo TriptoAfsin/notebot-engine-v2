@@ -5,6 +5,7 @@ import { routineService } from "services/app/routine.service";
 import { resultService } from "services/app/result.service";
 import { questionBankService } from "services/app/question-bank.service";
 import { AUTO_RAG_TOKEN } from "constants/secrets";
+import { handleApiCallAnalytics } from "utils/analytics";
 
 const appController = {
   appIntro: async (_req: Request, res: Response) => {
@@ -17,6 +18,7 @@ const appController = {
   // --- REST API v1 Endpoints ---
 
   getLevels: async (_req: Request, res: Response) => {
+    handleApiCallAnalytics();
     try {
       const data = await noteService.getAllLevels();
       res.json(data);
@@ -26,6 +28,7 @@ const appController = {
   },
 
   getSubjectsByLevel: async (req: Request, res: Response) => {
+    handleApiCallAnalytics();
     try {
       const levelId = parseInt(req.params.levelId);
       if (isNaN(levelId)) {
@@ -40,6 +43,7 @@ const appController = {
   },
 
   getTopicsBySubject: async (req: Request, res: Response) => {
+    handleApiCallAnalytics();
     try {
       const subjectId = parseInt(req.params.subjectId);
       if (isNaN(subjectId)) {
@@ -54,6 +58,7 @@ const appController = {
   },
 
   getNotesByTopic: async (req: Request, res: Response) => {
+    handleApiCallAnalytics();
     try {
       const topicId = parseInt(req.params.topicId);
       if (isNaN(topicId)) {
@@ -68,6 +73,7 @@ const appController = {
   },
 
   getLabSubjectsByLevel: async (req: Request, res: Response) => {
+    handleApiCallAnalytics();
     try {
       const levelId = parseInt(req.params.levelId);
       if (isNaN(levelId)) {
@@ -82,6 +88,7 @@ const appController = {
   },
 
   getLabTopics: async (req: Request, res: Response) => {
+    handleApiCallAnalytics();
     try {
       const levelId = parseInt(req.params.levelId);
       const { subjectSlug } = req.params;
@@ -97,6 +104,7 @@ const appController = {
   },
 
   getLabItems: async (req: Request, res: Response) => {
+    handleApiCallAnalytics();
     try {
       const levelId = parseInt(req.params.levelId);
       const { subjectSlug, topicSlug } = req.params;
@@ -112,6 +120,7 @@ const appController = {
   },
 
   getRoutines: async (_req: Request, res: Response) => {
+    handleApiCallAnalytics();
     try {
       const data = await routineService.getAllRoutines();
       res.json(data);
@@ -121,6 +130,7 @@ const appController = {
   },
 
   getResults: async (_req: Request, res: Response) => {
+    handleApiCallAnalytics();
     try {
       const data = await resultService.getAllResults();
       res.json(data);
@@ -130,6 +140,7 @@ const appController = {
   },
 
   getQuestionBanksByLevel: async (req: Request, res: Response) => {
+    handleApiCallAnalytics();
     try {
       const levelId = parseInt(req.params.levelId);
       if (isNaN(levelId)) {
@@ -144,6 +155,7 @@ const appController = {
   },
   // --- Auto RAG (tex-gpt) ---
   texGptSearch: async (req: Request, res: Response) => {
+    handleApiCallAnalytics();
     try {
       const { query } = req.body;
       if (!query || typeof query !== "string") {
