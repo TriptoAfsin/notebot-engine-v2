@@ -1,10 +1,13 @@
-import * as mysql from "mysql2";
+import { getPool } from "db/index";
 
-export const dbConfig = {
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "notebot",
-};
-
-export const db = mysql.createConnection(dbConfig);
+export async function connectDb() {
+  try {
+    const pool = getPool();
+    const client = await pool.connect();
+    client.release();
+    console.log("🟢 Connected to Postgres");
+  } catch (err) {
+    console.error("🔴 Error connecting to Postgres", err);
+    throw err;
+  }
+}

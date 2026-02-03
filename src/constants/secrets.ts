@@ -1,1 +1,11 @@
 export const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
+export const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+export const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
+export const SECONDARY_RECEIVER_ID = process.env.SECONDARY_RECEIVER_ID;
+export const DATABASE_PUBLIC_URL = process.env.DATABASE_PUBLIC_URL;
+export const REDIS_URL = process.env.REDIS_URL;
+export const ANALYTICS_ORIGIN = process.env.ANALYTICS_ORIGIN;
+export const ANALYTICS_AUTH_KEY = process.env.ANALYTICS_AUTH_KEY;
+export const COLLECT_ANALYTICS = process.env.COLLECT_ANALYTICS === "true";
+export const APP_PRODUCTION = process.env.APP_PRODUCTION === "true";
+export const NODE_ENV = process.env.NODE_ENV || "development";
