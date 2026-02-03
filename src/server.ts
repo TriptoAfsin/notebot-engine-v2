@@ -1,6 +1,6 @@
+import "dotenv/config";
 import bodyParser from "body-parser";
 import cors from "cors";
-import dotenv from "dotenv";
 import express, { Application } from "express";
 import swaggerUi from "swagger-ui-express";
 import appRoutes from "routes/app.routes";
@@ -11,9 +11,6 @@ import { connectDb } from "config/db";
 import { connectRedis } from "config/redis";
 import { errorHandler } from "middlewares/error-handler";
 import { swaggerSpec } from "config/swagger";
-
-//For env File
-dotenv.config();
 
 const setupMiddlewares = async (app: Application) => {
   app.use(bodyParser.json());
