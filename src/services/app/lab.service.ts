@@ -1,7 +1,7 @@
 import { getDb } from "db/index";
 import { labReports } from "db/schema";
 import { eq, and, asc } from "drizzle-orm";
-import { cacheService } from "./cacheService";
+import { cacheService } from "./cache.service";
 
 type LabSubject = { subjectSlug: string };
 type LabTopic = { topicName: string };

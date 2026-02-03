@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { noteService } from "services/app/noteService";
-import { labService } from "services/app/labService";
+import { noteService } from "services/app/note.service";
+import { labService } from "services/app/lab.service";
 
 const router = express.Router();
 

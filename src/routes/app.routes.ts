@@ -1,5 +1,5 @@
 import express from "express";
-import appController from "controllers/app/appController";
+import appController from "controllers/app/app.controller";
 
 const router = express.Router();
 
@@ -19,5 +19,8 @@ router.get("/api/v1/labs/:levelId/:subjectSlug/:topicSlug", appController.getLab
 router.get("/api/v1/routines", appController.getRoutines);
 router.get("/api/v1/results", appController.getResults);
 router.get("/api/v1/question-banks/:levelId", appController.getQuestionBanksByLevel);
+
+// Auto RAG search
+router.post("/app/tex-gpt", appController.texGptSearch);
 
 export default router;

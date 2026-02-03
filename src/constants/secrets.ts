@@ -9,3 +9,4 @@ export const ANALYTICS_AUTH_KEY = process.env.ANALYTICS_AUTH_KEY;
 export const COLLECT_ANALYTICS = process.env.COLLECT_ANALYTICS === "true";
 export const APP_PRODUCTION = process.env.APP_PRODUCTION === "true";
 export const NODE_ENV = process.env.NODE_ENV || "development";
+export const AUTO_RAG_TOKEN = process.env.AUTO_RAG_TOKEN;

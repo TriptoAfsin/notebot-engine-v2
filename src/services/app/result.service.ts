@@ -1,7 +1,7 @@
 import { getDb } from "db/index";
 import { results } from "db/schema";
 import { asc } from "drizzle-orm";
-import { cacheService } from "./cacheService";
+import { cacheService } from "./cache.service";
 
 export const resultService = {
   async getAllResults() {

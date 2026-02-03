@@ -1,7 +1,7 @@
 import { getDb } from "db/index";
 import { routines } from "db/schema";
 import { asc } from "drizzle-orm";
-import { cacheService } from "./cacheService";
+import { cacheService } from "./cache.service";
 
 export const routineService = {
   async getAllRoutines() {

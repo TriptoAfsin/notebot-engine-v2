@@ -2,13 +2,13 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { Application } from "express";
-import appRoutes from "routes/appRoutes";
-import compatRoutes from "routes/compatRoutes";
-import chatBotRoutes from "routes/chatbotRoutes";
-import homePageRoutes from "routes/homepageRoutes";
+import appRoutes from "routes/app.routes";
+import compatRoutes from "routes/compat.routes";
+import chatBotRoutes from "routes/chatbot.routes";
+import homePageRoutes from "routes/homepage.routes";
 import { connectDb } from "config/db";
 import { connectRedis } from "config/redis";
-import { errorHandler } from "middlewares/errorHandler";
+import { errorHandler } from "middlewares/error-handler";
 
 //For env File
 dotenv.config();

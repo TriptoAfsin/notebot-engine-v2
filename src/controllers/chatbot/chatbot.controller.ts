@@ -1,6 +1,6 @@
 import { MY_VERIFY_TOKEN } from "constants/secrets";
 import { Request, Response } from "express";
-import { chatBotIntroService } from "services/chatbot/chatBotService";
+import { chatBotIntroService } from "services/chatbot/chatbot.service";
 
 export const testMsg = async (req: Request, res: Response) => {
     const introRes = await chatBotIntroService(req);

@@ -1,5 +1,5 @@
 import { webBtnGen, payloadBtnGen } from "simple-messenger-blocks";
-import { quickReplyBtn } from "utils/generators/quickReplyBtn";
+import { quickReplyBtn } from "utils/generators/quick-reply-btn";
 
 let botConfig = {
   //Get started texts

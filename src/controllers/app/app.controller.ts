@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import { noteService } from "services/app/noteService";
-import { labService } from "services/app/labService";
-import { routineService } from "services/app/routineService";
-import { resultService } from "services/app/resultService";
-import { questionBankService } from "services/app/questionBankService";
+import { noteService } from "services/app/note.service";
+import { labService } from "services/app/lab.service";
+import { routineService } from "services/app/routine.service";
+import { resultService } from "services/app/result.service";
+import { questionBankService } from "services/app/question-bank.service";
+import { AUTO_RAG_TOKEN } from "constants/secrets";
 
 const appController = {
   appIntro: async (_req: Request, res: Response) => {
@@ -139,6 +140,35 @@ const appController = {
       res.json(data);
     } catch (err: any) {
       res.status(500).json({ error: err.message });
+    }
+  },
+  // --- Auto RAG (tex-gpt) ---
+  texGptSearch: async (req: Request, res: Response) => {
+    try {
+      const { query } = req.body;
+      if (!query || typeof query !== "string") {
+        res.status(400).json({ success: false, error: "Query is required" });
+        return;
+      }
+
+      if (!AUTO_RAG_TOKEN) {
+        res.status(500).json({ success: false, error: "AUTO_RAG_TOKEN not configured" });
+        return;
+      }
+
+      const response = await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${AUTO_RAG_TOKEN}/autorag/search`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query }),
+        }
+      );
+
+      const data = await response.json();
+      res.json({ success: true, result: data });
+    } catch (err: any) {
+      res.status(500).json({ success: false, error: err.message });
     }
   },
 };

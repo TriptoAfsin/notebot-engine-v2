@@ -1,7 +1,7 @@
 import { getDb } from "db/index";
 import { questionBanks } from "db/schema";
 import { eq, asc } from "drizzle-orm";
-import { cacheService } from "./cacheService";
+import { cacheService } from "./cache.service";
 
 export const questionBankService = {
   async getByLevel(levelId: number) {

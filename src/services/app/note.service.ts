@@ -1,7 +1,7 @@
 import { getDb } from "db/index";
 import { levels, subjects, topics, notes } from "db/schema";
 import { eq, asc, type InferSelectModel } from "drizzle-orm";
-import { cacheService } from "./cacheService";
+import { cacheService } from "./cache.service";
 
 type Level = InferSelectModel<typeof levels>;
 type Subject = InferSelectModel<typeof subjects>;

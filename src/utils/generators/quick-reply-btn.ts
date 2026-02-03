@@ -1,4 +1,4 @@
-import { lengthValidator } from "utils/validators/lengthValidator"
+import { lengthValidator } from "utils/validators/length-validator"
 
 export const quickReplyBtn = (title: string, payload: any) => {
     return {
