@@ -10,3 +10,7 @@ export const COLLECT_ANALYTICS = process.env.COLLECT_ANALYTICS === "true";
 export const APP_PRODUCTION = process.env.APP_PRODUCTION === "true";
 export const NODE_ENV = process.env.NODE_ENV || "development";
 export const AUTO_RAG_TOKEN = process.env.AUTO_RAG_TOKEN;
+export const GRAPH_API_URL = process.env.GRAPH_API_URL || "https://graph.facebook.com/v21.0";
+export const RESEND_API_KEY = process.env.RESEND_API_KEY;
+export const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "notebot@t21.dev";
+export const RESEND_FROM_NAME = process.env.RESEND_FROM_NAME || "NoteBot";

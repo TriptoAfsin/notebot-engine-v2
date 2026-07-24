@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteBot Messenger Tester</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; }
+
+    .container { display: flex; height: 100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 320px;
+      background: #f0f2f5;
+      border-right: 1px solid #dcdfe3;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .sidebar-header {
+      padding: 16px 20px;
+      background: #1877f2;
+      color: white;
+    }
+    .sidebar-header h1 { font-size: 16px; font-weight: 700; }
+    .sidebar-header p { font-size: 11px; opacity: 0.8; margin-top: 2px; }
+    .sidebar-body { padding: 16px 20px; flex: 1; }
+
+    .field { margin-bottom: 14px; }
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #65676b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .field input {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #ccd0d5;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input:focus { border-color: #1877f2; }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn:active { transform: scale(0.98); }
+    .btn-blue { background: #1877f2; color: white; }
+    .btn-green { background: #42b72a; color: white; }
+    .btn-gray { background: #e4e6eb; color: #050505; }
+    .btn-red { background: #fa3e3e; color: white; }
+    .btn-sm { padding: 7px 10px; font-size: 12px; margin-bottom: 4px; text-align: left; }
+
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+    .status-ok { background: #d4edda; color: #155724; }
+    .status-fail { background: #f8d7da; color: #721c24; }
+    .status-pending { background: #fff3cd; color: #856404; }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #65676b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 20px 0 8px;
+      padding-top: 16px;
+      border-top: 1px solid #dcdfe3;
+    }
+
+    /* Chat Area */
+    .chat-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+
+    .chat-header {
+      padding: 14px 24px;
+      background: #fff;
+      border-bottom: 1px solid #e4e6eb;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .chat-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #1877f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .chat-name { font-weight: 600; font-size: 15px; }
+    .chat-subtitle { font-size: 12px; color: #65676b; }
+
+    .messages {
+      flex: 1;
+      padding: 20px 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .msg {
+      max-width: 65%;
+      padding: 8px 14px;
+      border-radius: 18px;
+      font-size: 15px;
+      line-height: 1.4;
+      word-wrap: break-word;
+      animation: fadeIn 0.15s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    .msg.user {
+      align-self: flex-end;
+      background: #1877f2;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+    .msg.bot {
+      align-self: flex-start;
+      background: #e4e6eb;
+      color: #050505;
+      border-bottom-left-radius: 4px;
+    }
+    .msg.system {
+      align-self: center;
+      background: transparent;
+      color: #65676b;
+      font-size: 12px;
+      padding: 4px 12px;
+      max-width: 90%;
+      text-align: center;
+    }
+    .msg.error {
+      align-self: center;
+      background: #fee2e2;
+      color: #991b1b;
+      font-size: 12px;
+      padding: 6px 14px;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .msg-meta {
+      font-size: 10px;
+      color: #65676b;
+      margin-top: 2px;
+    }
+    .msg.user .msg-meta { text-align: right; color: rgba(255,255,255,0.7); }
+
+    /* Quick replies shown in chat */
+    .quick-replies {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 4px 0;
+      align-self: flex-start;
+    }
+    .quick-reply-btn {
+      padding: 6px 14px;
+      border: 1px solid #1877f2;
+      border-radius: 18px;
+      background: white;
+      color: #1877f2;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .quick-reply-btn:hover {
+      background: #1877f2;
+      color: white;
+    }
+
+    /* Buttons template in chat */
+    .button-template {
+      align-self: flex-start;
+      background: #e4e6eb;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 65%;
+      animation: fadeIn 0.15s ease;
+    }
+    .button-template-text {
+      padding: 10px 14px;
+      font-size: 15px;
+      line-height: 1.4;
+      color: #050505;
+    }
+    .button-template-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-top: 1px solid #ccd0d5;
+      background: transparent;
+      color: #1877f2;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+    }
+    .button-template-btn:hover { background: #f0f2f5; }
+
+    /* Generic template */
+    .generic-template {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0;
+      align-self: flex-start;
+      max-width: 80%;
+    }
+    .generic-card {
+      min-width: 220px;
+      max-width: 220px;
+      border-radius: 12px;
+      background: #e4e6eb;
+      overflow: hidden;
+      animation: fadeIn 0.15s ease;
+    }
+    .generic-card-body { padding: 10px 14px; }
+    .generic-card-title { font-weight: 600; font-size: 14px; }
+    .generic-card-subtitle { font-size: 12px; color: #65676b; margin-top: 2px; }
+
+    .input-area {
+      padding: 12px 24px;
+      border-top: 1px solid #e4e6eb;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .input-area input {
+      flex: 1;
+      padding: 10px 16px;
+      border: 1px solid #ccd0d5;
+      border-radius: 20px;
+      font-size: 15px;
+      outline: none;
+    }
+    .input-area input:focus { border-color: #1877f2; }
+    .send-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: #1877f2;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: opacity 0.2s;
+    }
+    .send-btn:hover { opacity: 0.85; }
+    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Log panel */
+    .log-panel {
+      margin-top: 12px;
+      background: #1a1a2e;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .log-panel-header {
+      padding: 6px 10px;
+      background: #16213e;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8892b0;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .log-panel-body {
+      max-height: 180px;
+      overflow-y: auto;
+      padding: 8px 10px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 11px;
+      color: #a8b2d1;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+    .log-entry { margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid #1a1a3e; }
+    .log-entry.error { color: #ff6b6b; }
+    .log-entry.success { color: #51cf66; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h1>NoteBot Messenger Tester</h1>
+        <p>Local webhook simulator</p>
+      </div>
+      <div class="sidebar-body">
+        <!-- Config -->
+        <div class="field">
+          <label>Webhook URL (ngrok)</label>
+          <input type="text" id="webhookUrl" placeholder="https://xxxx.ngrok-free.app/webhook">
+        </div>
+        <div class="field">
+          <label>Verify Token</label>
+          <input type="text" id="verifyToken" value="test_verify_token_abc123">
+        </div>
+        <div class="field">
+          <label>Sender PSID</label>
+          <input type="text" id="senderId" value="TEST_USER_123">
+        </div>
+
+        <button class="btn btn-blue" onclick="saveConfig()" style="margin-bottom: 6px">Save Config</button>
+        <button class="btn btn-green" onclick="verifyWebhook()">Test Webhook Verification</button>
+
+        <div id="verifyResult"></div>
+
+        <!-- Quick Actions -->
+        <div class="section-title">Postbacks</div>
+        <button class="btn btn-gray btn-sm" onclick="sendPostback('GET_STARTED', 'Get Started')">Get Started</button>
+        <button class="btn btn-gray btn-sm" onclick="sendPostback('help_payload', 'Help')">Help</button>
+        <button class="btn btn-gray btn-sm" onclick="sendPostback('donation_payload', 'Donate')">Donate</button>
+
+        <div class="section-title">Quick Replies</div>
+        <button class="btn btn-gray btn-sm" onclick="sendQuickReply('help_flow', 'Usage')">Usage</button>
+        <button class="btn btn-gray btn-sm" onclick="sendQuickReply('notes_flow', 'Notes')">Notes</button>
+        <button class="btn btn-gray btn-sm" onclick="sendQuickReply('qb_flow', 'Question Bank')">Question Bank</button>
+        <button class="btn btn-gray btn-sm" onclick="sendQuickReply('routine_flow', 'Routine')">Routine</button>
+        <button class="btn btn-gray btn-sm" onclick="sendQuickReply('result_flow', 'Results')">Results</button>
+        <button class="btn btn-gray btn-sm" onclick="sendQuickReply('reports_flow', 'Lab Reports')">Lab Reports</button>
+
+        <div class="section-title">Actions</div>
+        <button class="btn btn-red btn-sm" onclick="clearChat()">Clear Chat</button>
+
+        <!-- Logs -->
+        <div class="section-title">Raw Logs</div>
+        <div class="log-panel">
+          <div class="log-panel-header" onclick="toggleLogs()">
+            <span>Network Log</span>
+            <span id="logToggle">▼</span>
+          </div>
+          <div class="log-panel-body" id="logBody"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="chat-area">
+      <div class="chat-header">
+        <div class="chat-avatar">NB</div>
+        <div>
+          <div class="chat-name">NoteBot</div>
+          <div class="chat-subtitle" id="connectionStatus">Not connected</div>
+        </div>
+      </div>
+
+      <div class="messages" id="messages">
+        <div class="msg system">
+          Set your ngrok webhook URL in the sidebar and click "Save Config" to start testing.
+        </div>
+      </div>
+
+      <div class="input-area">
+        <input type="text" id="msgInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendMessage()">
+        <button class="send-btn" onclick="sendMessage()" title="Send">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+<script>
+const API = '';
+const messagesEl = document.getElementById('messages');
+const msgInput = document.getElementById('msgInput');
+const logBody = document.getElementById('logBody');
+
+// --- SSE for real-time bot responses ---
+const evtSource = new EventSource('/api/events');
+
+evtSource.addEventListener('bot_response', (e) => {
+  const data = JSON.parse(e.data);
+  renderBotResponse(data);
+});
+
+evtSource.addEventListener('system', (e) => {
+  const data = JSON.parse(e.data);
+  if (data.type === 'error') {
+    addMessage('error', `Error: ${data.error}`);
+  }
+});
+
+evtSource.onopen = () => {
+  document.getElementById('connectionStatus').textContent = 'Connected to tester';
+};
+
+evtSource.onerror = () => {
+  document.getElementById('connectionStatus').textContent = 'Disconnected';
+};
+
+// --- Config ---
+async function saveConfig() {
+  const webhookUrl = document.getElementById('webhookUrl').value.trim();
+  const verifyToken = document.getElementById('verifyToken').value.trim();
+  const senderId = document.getElementById('senderId').value.trim();
+
+  const res = await fetch('/api/config', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ webhookUrl, verifyToken, senderId }),
+  });
+  const data = await res.json();
+  addMessage('system', `Config saved. Webhook: ${data.webhookUrl}`);
+  addLog('success', `Config saved: ${JSON.stringify(data)}`);
+}
+
+// Load saved config on start
+(async () => {
+  const res = await fetch('/api/config');
+  const data = await res.json();
+  if (data.webhookUrl) document.getElementById('webhookUrl').value = data.webhookUrl;
+  if (data.verifyToken) document.getElementById('verifyToken').value = data.verifyToken;
+  if (data.senderId) document.getElementById('senderId').value = data.senderId;
+})();
+
+// --- Verify Webhook ---
+async function verifyWebhook() {
+  const resultEl = document.getElementById('verifyResult');
+  resultEl.innerHTML = '<div class="status-badge status-pending">Testing...</div>';
+
+  try {
+    const res = await fetch('/api/verify', { method: 'POST' });
+    const data = await res.json();
+
+    if (data.success && data.passed) {
+      resultEl.innerHTML = '<div class="status-badge status-ok">Verification passed</div>';
+      addMessage('system', 'Webhook verification passed!');
+      addLog('success', `Verify OK - Challenge: ${data.expected} → Received: ${data.received}`);
+    } else if (data.success) {
+      resultEl.innerHTML = `<div class="status-badge status-fail">Failed (HTTP ${data.status})</div>`;
+      addMessage('error', `Webhook verification failed. Status: ${data.status}, Expected: "${data.expected}", Got: "${data.received}"`);
+      addLog('error', `Verify FAIL - Status: ${data.status}, Expected: ${data.expected}, Got: ${data.received}`);
+    } else {
+      resultEl.innerHTML = `<div class="status-badge status-fail">${data.error}</div>`;
+      addMessage('error', `Verification error: ${data.error}`);
+      addLog('error', `Verify ERROR: ${data.error}`);
+    }
+  } catch (err) {
+    resultEl.innerHTML = '<div class="status-badge status-fail">Network error</div>';
+    addLog('error', `Verify network error: ${err.message}`);
+  }
+}
+
+// --- Send Message ---
+async function sendMessage() {
+  const text = msgInput.value.trim();
+  if (!text) return;
+
+  msgInput.value = '';
+  addMessage('user', text);
+
+  try {
+    const res = await fetch('/api/send-message', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+    });
+    const data = await res.json();
+
+    if (!data.success) {
+      addMessage('error', `Failed to send: ${data.error}`);
+    }
+    addLog(data.success ? 'success' : 'error', `POST /webhook → ${data.status || 'ERR'}: ${data.response || data.error}`);
+  } catch (err) {
+    addMessage('error', `Network error: ${err.message}`);
+    addLog('error', `Send error: ${err.message}`);
+  }
+}
+
+// --- Postback ---
+async function sendPostback(payload, title) {
+  addMessage('user', `[Postback] ${title}`);
+
+  try {
+    const res = await fetch('/api/send-postback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ payload, title }),
+    });
+    const data = await res.json();
+    if (!data.success) addMessage('error', `Failed: ${data.error}`);
+    addLog(data.success ? 'success' : 'error', `Postback "${payload}" → ${data.status || 'ERR'}`);
+  } catch (err) {
+    addMessage('error', `Network error: ${err.message}`);
+  }
+}
+
+// --- Quick Reply ---
+async function sendQuickReply(payload, text) {
+  addMessage('user', `[Quick Reply] ${text}`);
+
+  try {
+    const res = await fetch('/api/send-quick-reply', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ payload, text }),
+    });
+    const data = await res.json();
+    if (!data.success) addMessage('error', `Failed: ${data.error}`);
+    addLog(data.success ? 'success' : 'error', `Quick Reply "${payload}" → ${data.status || 'ERR'}`);
+  } catch (err) {
+    addMessage('error', `Network error: ${err.message}`);
+  }
+}
+
+// --- Render bot response from mock Graph API ---
+function renderBotResponse(data) {
+  const msg = data.message;
+  if (!msg) return;
+
+  // Text message
+  if (msg.text) {
+    addMessage('bot', msg.text);
+  }
+
+  // Quick replies
+  if (msg.quick_replies && msg.quick_replies.length > 0) {
+    const container = document.createElement('div');
+    container.className = 'quick-replies';
+    msg.quick_replies.forEach(qr => {
+      const btn = document.createElement('button');
+      btn.className = 'quick-reply-btn';
+      btn.textContent = qr.title;
+      btn.onclick = () => sendQuickReply(qr.payload, qr.title);
+      container.appendChild(btn);
+    });
+    messagesEl.appendChild(container);
+  }
+
+  // Button template
+  if (msg.attachment && msg.attachment.type === 'template') {
+    const tpl = msg.attachment.payload;
+
+    if (tpl.template_type === 'button') {
+      const el = document.createElement('div');
+      el.className = 'button-template';
+      el.innerHTML = `<div class="button-template-text">${escapeHtml(tpl.text)}</div>`;
+      (tpl.buttons || []).forEach(b => {
+        const btn = document.createElement('button');
+        btn.className = 'button-template-btn';
+        btn.textContent = b.title;
+        if (b.type === 'postback') {
+          btn.onclick = () => sendPostback(b.payload, b.title);
+        } else if (b.type === 'web_url') {
+          btn.onclick = () => window.open(b.url, '_blank');
+        }
+        el.appendChild(btn);
+      });
+      messagesEl.appendChild(el);
+    }
+
+    // Generic template (carousel)
+    if (tpl.template_type === 'generic') {
+      const carousel = document.createElement('div');
+      carousel.className = 'generic-template';
+      (tpl.elements || []).forEach(card => {
+        const cardEl = document.createElement('div');
+        cardEl.className = 'generic-card';
+        let html = '<div class="generic-card-body">';
+        html += `<div class="generic-card-title">${escapeHtml(card.title)}</div>`;
+        if (card.subtitle) html += `<div class="generic-card-subtitle">${escapeHtml(card.subtitle)}</div>`;
+        html += '</div>';
+        cardEl.innerHTML = html;
+        (card.buttons || []).forEach(b => {
+          const btn = document.createElement('button');
+          btn.className = 'button-template-btn';
+          btn.textContent = b.title;
+          if (b.type === 'postback') btn.onclick = () => sendPostback(b.payload, b.title);
+          else if (b.type === 'web_url') btn.onclick = () => window.open(b.url, '_blank');
+          cardEl.appendChild(btn);
+        });
+        carousel.appendChild(cardEl);
+      });
+      messagesEl.appendChild(carousel);
+    }
+  }
+
+  scrollToBottom();
+  addLog('success', `Bot response: ${JSON.stringify(msg)}`);
+}
+
+// --- UI Helpers ---
+function addMessage(type, text) {
+  const el = document.createElement('div');
+  el.className = `msg ${type}`;
+  el.textContent = text;
+  messagesEl.appendChild(el);
+  scrollToBottom();
+}
+
+function scrollToBottom() {
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function clearChat() {
+  messagesEl.innerHTML = '<div class="msg system">Chat cleared.</div>';
+  fetch('/api/responses', { method: 'DELETE' });
+}
+
+function addLog(type, text) {
+  const entry = document.createElement('div');
+  entry.className = `log-entry ${type}`;
+  const time = new Date().toLocaleTimeString();
+  entry.textContent = `[${time}] ${text}`;
+  logBody.appendChild(entry);
+  logBody.scrollTop = logBody.scrollHeight;
+}
+
+let logsOpen = true;
+function toggleLogs() {
+  logsOpen = !logsOpen;
+  logBody.style.display = logsOpen ? 'block' : 'none';
+  document.getElementById('logToggle').textContent = logsOpen ? '▼' : '▶';
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>

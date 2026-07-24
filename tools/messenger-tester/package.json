@@ -1,0 +1,12 @@
+{
+  "name": "notebot-messenger-tester",
+  "version": "1.0.0",
+  "description": "Local Messenger simulator for testing NoteBot webhook",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}
