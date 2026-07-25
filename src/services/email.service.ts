@@ -10,6 +10,9 @@ import {
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
+/** Replies to automation emails go to the maintainer's inbox. */
+const DEFAULT_REPLY_TO = "afsintripto@gmail.com";
+
 export interface SendEmailArgs {
   to: string | string[];
   subject: string;
@@ -52,7 +55,7 @@ export const emailService = {
         subject,
         ...(html ? { html } : {}),
         ...(text ? { text } : {}),
-        ...(replyTo ? { reply_to: replyTo } : {}),
+        reply_to: replyTo ?? DEFAULT_REPLY_TO,
       }),
     });
     if (!res.ok) {
