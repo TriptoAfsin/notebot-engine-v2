@@ -3,6 +3,7 @@ import { noteService } from "services/app/note.service";
 import { labService } from "services/app/lab.service";
 import { scrapeResultsService } from "services/app/scrape-results.service";
 import { syllabusService } from "services/app/syllabus.service";
+import { analyticsService } from "services/app/analytics.service";
 
 const router = express.Router();
 
@@ -142,6 +143,10 @@ router.get(
         res.status(404).json({ error: "Subject not found" });
         return;
       }
+
+      // analytics: a note subject was opened (fire-and-forget)
+      analyticsService.incrementNoteSubject(subjectSlug);
+      analyticsService.bumpDailyApp();
 
       // Use pre-synced v1 topic list if available (exact v1 format)
       const meta = subject.metadata as Record<string, unknown> | null;
@@ -380,6 +385,10 @@ router.get(
         res.status(404).json({ error: "Level not found" });
         return;
       }
+
+      // analytics: a lab subject was opened (fire-and-forget)
+      analyticsService.incrementLabSubject(v1SubjectSlug);
+      analyticsService.bumpDailyApp();
 
       // Use pre-synced v1 lab topic list if available
       const levelMeta = level.metadata as Record<string, unknown> | null;
