@@ -559,8 +559,12 @@ router.get("/results", async (req: Request, res: Response) => {
  *       200:
  *         description: Array of batches
  */
-router.get("/app/syllabus", (_req: Request, res: Response) => {
-  res.json(syllabusService.getBatches());
+router.get("/app/syllabus", async (_req: Request, res: Response) => {
+  try {
+    res.json(await syllabusService.getBatches());
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 /**
@@ -581,13 +585,17 @@ router.get("/app/syllabus", (_req: Request, res: Response) => {
  *       404:
  *         description: Batch not found
  */
-router.get("/app/syllabus/:batch", (req: Request, res: Response) => {
-  const depts = syllabusService.getDepts(req.params.batch);
-  if (!depts) {
-    res.status(404).json({ error: "Batch not found" });
-    return;
+router.get("/app/syllabus/:batch", async (req: Request, res: Response) => {
+  try {
+    const depts = await syllabusService.getDepts(req.params.batch);
+    if (!depts) {
+      res.status(404).json({ error: "Batch not found" });
+      return;
+    }
+    res.json(depts);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
-  res.json(depts);
 });
 
 /**
@@ -613,13 +621,17 @@ router.get("/app/syllabus/:batch", (req: Request, res: Response) => {
  *       404:
  *         description: Not found
  */
-router.get("/app/syllabus/:batch/:dept", (req: Request, res: Response) => {
-  const topics = syllabusService.getTopics(req.params.batch, req.params.dept);
-  if (!topics) {
-    res.status(404).json({ error: "Syllabus not found" });
-    return;
+router.get("/app/syllabus/:batch/:dept", async (req: Request, res: Response) => {
+  try {
+    const topics = await syllabusService.getTopics(req.params.batch, req.params.dept);
+    if (!topics) {
+      res.status(404).json({ error: "Syllabus not found" });
+      return;
+    }
+    res.json(topics);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
-  res.json(topics);
 });
 
 export default router;
