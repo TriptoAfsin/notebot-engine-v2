@@ -10,8 +10,25 @@ import { syllabusService } from "services/app/syllabus.service";
 
 const SERVICE = "src/services/app/syllabus.service.ts";
 
+/**
+ * Walks back through the file's history for the newest revision that still holds the
+ * hardcoded arrays. Reading HEAD only worked while the DB rewrite was uncommitted — once it
+ * landed, HEAD became the new implementation and there was nothing left to compare against.
+ */
+function legacyRef(): string {
+  const revs = execSync(`git rev-list HEAD -- ${SERVICE}`, { maxBuffer: 8 * 1024 * 1024 })
+    .toString().trim().split(/\r?\n/).filter(Boolean);
+  for (const rev of revs) {
+    const src = execSync(`git show ${rev}:${SERVICE}`, { maxBuffer: 8 * 1024 * 1024 }).toString();
+    if (src.includes("const batch45Depts")) return rev;
+  }
+  throw new Error(`no revision of ${SERVICE} still contains the hardcoded dataset`);
+}
+
 function loadLegacy() {
-  const src = execSync(`git show HEAD:${SERVICE}`, { maxBuffer: 8 * 1024 * 1024 }).toString();
+  const ref = legacyRef();
+  console.log(`comparing against the hardcoded dataset at ${ref.slice(0, 8)}`);
+  const src = execSync(`git show ${ref}:${SERVICE}`, { maxBuffer: 8 * 1024 * 1024 }).toString();
   const grab = (name: string) => {
     const i = src.indexOf(`const ${name}`);
     const start = src.indexOf("=", i) + 1;
