@@ -14,3 +14,6 @@ export const GRAPH_API_URL = process.env.GRAPH_API_URL || "https://graph.faceboo
 export const RESEND_API_KEY = process.env.RESEND_API_KEY;
 export const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "notebot@t21.dev";
 export const RESEND_FROM_NAME = process.env.RESEND_FROM_NAME || "NoteBot";
+// Shared secret for machine callers (the CMS's cache-bust action, and later the ingest API).
+// Unset means the admin routes refuse every request rather than running unauthenticated.
+export const ADMIN_API_KEY = process.env.ADMIN_API_KEY;
