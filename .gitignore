@@ -22,3 +22,13 @@ nul
 .DS_Store
 Thumbs.db
 tmpclaude-*
+
+# Output of the src/scripts/* parity tooling. These are dumps of a point-in-time database and a
+# crawl of a running v1, regenerable by re-running the scripts — the scripts are the source, these
+# are not. Keeping them tracked added ~43k lines of churn to an unrelated commit.
+/v1-crawl.json
+/v1-home.json
+/v1-payload-map.json
+/v1-title-map.json
+/dupe-titles.json
+/parity-*.json
