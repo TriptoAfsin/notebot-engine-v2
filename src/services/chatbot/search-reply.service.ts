@@ -1,5 +1,5 @@
 import { searchService, type SearchHit } from "services/app/search.service";
-import { buttonGroups, textBlock, webButton, type Button } from "utils/messenger-blocks";
+import { buttonGroups, noteBlock, textBlock, type Button } from "utils/messenger-blocks";
 
 /**
  * Turns a free-text Messenger message into blocks to send back.
@@ -28,18 +28,34 @@ export function defaultReplyBlocks() {
   return buttonGroups(header, SUGGESTIONS);
 }
 
-/** A hit's button label: the title, prefixed so a lab is distinguishable from a note. */
-const labelFor = (h: SearchHit) => (h.kind === "lab" ? `🧪 ${h.title}` : h.title);
-
+/**
+ * Search results as note bubbles — one per hit, the same shape a topic page uses.
+ *
+ * The earlier version returned button templates, which capped every title at 20 characters and so
+ * showed "Knitting Technology " for two different books. A text bubble carries the full title, the
+ * subject and topic it came from, and a tappable link.
+ */
 export function searchResultBlocks(query: string, hits: SearchHit[]) {
-  const header = `🔍 Top ${hits.length} result${hits.length === 1 ? "" : "s"} for “${query}”`;
-  // buttonGroups splits across blocks rather than letting Messenger discard the 4th button,
-  // so 5 hits arrive as 3 + 2 instead of silently becoming 3
-  return buttonGroups(header, hits.map((h) => webButton(labelFor(h), h.url)));
+  const header = textBlock(
+    `🔍 Top ${hits.length} result${hits.length === 1 ? "" : "s"} for “${query}”`
+  );
+  return [
+    header,
+    ...hits.map((h) => {
+      const where = [h.topic, h.subject].filter(Boolean).join(" · ");
+      const title = h.kind === "lab" ? `🧪 ${h.title}` : h.title;
+      return noteBlock(title, h.url, where || undefined);
+    }),
+  ];
 }
 
 /**
- * The single entry point the webhook uses. Returns the blocks to send, in order.
+ * The single entry point the webhook uses.
+ *
+ * v1 stopped at its keyword table: anything it did not recognise got the default suggestion reply,
+ * which is why 10,294 searches were logged as misses. Here an unmatched message is searched first,
+ * and only a genuinely empty result falls through to that default — so the dead end is the last
+ * resort rather than the first answer.
  */
 export async function replyForQuery(text: string) {
   const query = String(text ?? "").trim();
@@ -48,18 +64,7 @@ export async function replyForQuery(text: string) {
   try {
     const hits = await searchService.search(query, 5);
     if (hits.length === 0) return defaultReplyBlocks();
-
-    // A summary above the buttons carries the context a 20-character button title cannot.
-    // Topic first, then subject: a hit usually matches on its topic ("Polymer Degradation"),
-    // and the note's own title ("Rashed Sir Sheet") means nothing without it.
-    const summary = hits
-      .map((h, i) => {
-        const where = [h.topic, h.subject].filter(Boolean).join(" · ");
-        return `${i + 1}. ${h.title}${where ? `\n     ${where}` : ""}`;
-      })
-      .join("\n");
-
-    return [textBlock(summary), ...searchResultBlocks(query, hits)];
+    return searchResultBlocks(query, hits);
   } catch (err) {
     console.error("[search] failed for query", JSON.stringify(query), err);
     // never leave the user with silence

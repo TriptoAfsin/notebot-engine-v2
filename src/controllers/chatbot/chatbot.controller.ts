@@ -2,33 +2,35 @@ import { MY_VERIFY_TOKEN, PAGE_ACCESS_TOKEN, GRAPH_API_URL } from "constants/sec
 import { Request, Response } from "express";
 import { chatBotIntroService } from "services/chatbot/chatbot.service";
 import { replyForQuery } from "services/chatbot/search-reply.service";
+import { resolvePayload } from "services/chatbot/flow.service";
+import { keywordStats, matchKeywords } from "services/chatbot/keyword.service";
+import { staticFlowCount } from "config/static-flows";
+import type { SenderAction } from "utils/messenger-blocks";
 
 export const testMsg = async (req: Request, res: Response) => {
     const introRes = await chatBotIntroService(req);
-
-    return res.send(introRes);
+    // Surface what the bot can actually answer, so a deploy that lost its rule tables is visible
+    // here rather than only when a student taps something.
+    return res.send({ ...introRes, flows: { bespoke: staticFlowCount(), ...keywordStats() } });
 };
 
 export const getWebhook = (req: Request, res: Response) => {
-    // Your verify token. Should be a random string.
     let VERIFY_TOKEN = MY_VERIFY_TOKEN;
 
-    // Parse the query params
     let mode = req.query["hub.mode"];
     let token = req.query["hub.verify_token"];
     let challenge = req.query["hub.challenge"];
 
-    // Checks if a token and mode is in the query string of the request
     if (mode && token) {
-      // Checks the mode and token sent is correct
       if (mode === "subscribe" && token === VERIFY_TOKEN) {
-        // Responds with the challenge token from the request
         console.log("WEBHOOK_VERIFIED");
         res.status(200).send(challenge);
       } else {
-        // Responds with '403 Forbidden' if verify tokens do not match
         res.sendStatus(403);
       }
+    } else {
+      // Without this a malformed handshake hangs until the client times out.
+      res.sendStatus(400);
     }
 };
 
@@ -67,50 +69,91 @@ export const postWebhook = async (req: Request, res: Response) => {
     }
 };
 
+/**
+ * A typed message.
+ *
+ * Order matters and mirrors v1: a quick reply carries a payload and is routed like a postback, then
+ * the keyword table gets first refusal on free text, and only then does search run. v1 stops at the
+ * keyword table — an unmatched message got a generic suggestion reply — so search is strictly extra.
+ */
 async function handleMessage(senderPsid: string, receivedMessage: any) {
-    let response: any;
+    // A quick reply is a postback wearing a message's clothes: it carries the payload, and v1 routes
+    // it through the same branch table. Answering it as free text would search for the button label.
+    const quickReplyPayload = receivedMessage.quick_reply?.payload;
+    if (quickReplyPayload) return handlePostback(senderPsid, { payload: quickReplyPayload });
 
-    if (receivedMessage.quick_reply) {
-        // Handle quick reply
-        const payload = receivedMessage.quick_reply.payload;
-        response = { text: `Quick reply received: ${payload}` };
-    } else if (receivedMessage.text) {
-        // Free text is treated as a search. On a miss replyForQuery returns v1's default
-        // suggestion reply, so the bot never answers with silence or a bare "no results".
-        const blocks = await replyForQuery(receivedMessage.text);
-        for (const block of blocks) {
-            await callSendAPI(senderPsid, block);
-        }
-        return;
+    const text: string | undefined = receivedMessage.text;
+    if (!text) {
+        // Stickers, images and audio have no text to act on. v1 ignores them silently; saying so is
+        // friendlier than appearing to have crashed.
+        return sendAll(senderPsid, [
+            { text: "I can only read text for now 🙈 — try typing what you are looking for." },
+        ]);
     }
 
-    if (response) {
-        await callSendAPI(senderPsid, response);
-    }
+    await mark(senderPsid, "mark_seen");
+    await mark(senderPsid, "typing_on");
+
+    // 1. v1's keyword table, in v1's order.
+    const keyword = matchKeywords(text);
+    if (keyword) return sendAll(senderPsid, keyword.blocks);
+
+    // 2. No keyword matched. v1 stopped here and showed the default suggestion reply — the reason
+    //    10,294 searches are logged as misses. Search instead, re-arming the typing indicator first
+    //    so the thread shows the bot working rather than going quiet while the query runs.
+    await mark(senderPsid, "typing_on");
+    const blocks = await replyForQuery(text);
+
+    // 3. replyForQuery already falls through to the default reply when the search finds nothing, so
+    //    the dead end is the last resort instead of the first answer.
+    return sendAll(senderPsid, blocks as Record<string, unknown>[]);
 }
 
+/** A button tap. Every payload goes through one resolver — see flow.service.ts. */
 async function handlePostback(senderPsid: string, receivedPostback: any) {
-    const payload = receivedPostback.payload;
-    let response: any;
+    const payload = String(receivedPostback?.payload ?? "");
 
-    switch (payload) {
-        case "GET_STARTED":
-            response = { text: "Welcome to NoteBot! How can I help you today?" };
-            break;
-        case "help_payload":
-            response = { text: "NoteBot helps you find study materials for Textile Education (BUTEX)." };
-            break;
-        case "donation_payload":
-            response = { text: "Thank you for considering a donation! Visit our page to learn more." };
-            break;
-        default:
-            response = { text: `Postback received: ${payload}` };
-    }
+    await mark(senderPsid, "mark_seen");
+    await mark(senderPsid, "typing_on");
 
-    await callSendAPI(senderPsid, response);
+    const blocks = await resolvePayload(payload);
+    if (blocks?.length) return sendAll(senderPsid, blocks);
+
+    // An unrouted payload used to answer "Postback received: <payload>". Searching the payload text
+    // at least offers something relevant; v1 answered nothing at all for its 13 dead buttons.
+    const fallback = await replyForQuery(payload.replace(/_/g, " "));
+    return sendAll(senderPsid, fallback as Record<string, unknown>[]);
 }
 
-async function callSendAPI(senderPsid: string, response: any) {
+/* ------------------------------------------------------------------- sending */
+
+async function sendAll(senderPsid: string, blocks: Record<string, unknown>[]) {
+    for (const block of blocks) {
+        await callSendAPI(senderPsid, block);
+    }
+}
+
+/**
+ * A sender action (typing indicator / read receipt).
+ *
+ * Typing expires by itself after 20 seconds or the moment a message is sent, so unlike v1 there is
+ * no `typing_off` after every block — that tripled v1's Send API traffic for no visible effect.
+ * Failures are swallowed: a missing typing indicator must never stop the actual reply.
+ */
+async function mark(senderPsid: string, action: SenderAction) {
+    const url = `${GRAPH_API_URL}/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
+    try {
+        await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ recipient: { id: senderPsid }, sender_action: action }),
+        });
+    } catch {
+        /* indicators are cosmetic */
+    }
+}
+
+async function callSendAPI(senderPsid: string, response: unknown) {
     const url = `${GRAPH_API_URL}/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
 
     const requestBody = {
@@ -127,7 +170,10 @@ async function callSendAPI(senderPsid: string, response: any) {
         });
 
         if (!result.ok) {
-            console.error(`Send API error: ${result.status} ${result.statusText}`);
+            // Include the body: Meta explains *which* field it rejected, and without it a 400 is
+            // indistinguishable from a bad token.
+            const detail = await result.text().catch(() => "");
+            console.error(`Send API error: ${result.status} ${result.statusText} ${detail.slice(0, 300)}`);
         }
     } catch (err) {
         console.error("Send API error:", err);

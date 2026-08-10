@@ -555,6 +555,16 @@ async function main() {
       (s) => s.levelId === lvl.id && s.slug.toLowerCase() === ins.slug.toLowerCase()
     );
     if (exists) {
+      const existingUrl = ((exists.metadata ?? {}) as any).directUrl;
+      // Never clobber a link v2 already has. Where v1 and v2 point somewhere
+      // different (UM), which one is current is an editorial call, not one this
+      // script can make — leave v2's and let the report surface the conflict.
+      if (existingUrl && keyOf(existingUrl) !== keyOf(ins.url)) {
+        console.log(
+          `  SKIP ${ins.displayName}: v2 already links ${existingUrl}, v1 has ${ins.url} — needs a human decision`
+        );
+        continue;
+      }
       const meta = { ...((exists.metadata ?? {}) as any), directUrl: ins.url };
       await db.update(subjects).set({ metadata: meta }).where(eq(subjects.id, exists.id));
     } else {

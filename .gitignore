@@ -32,3 +32,6 @@ tmpclaude-*
 /v1-title-map.json
 /dupe-titles.json
 /parity-*.json
+# Regenerable reports from the bot parity scripts (the rule tables in src/config are not).
+/payload-parity.json
+/payload-coverage.json
