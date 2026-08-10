@@ -25,7 +25,7 @@ const arg = (name: string, fallback: string) => {
 };
 
 const GOLDEN = arg("--golden", "T:/Bots/bots/notebot-engine-v1/.ingest/payload-blocks.json");
-const OUT = path.join(__dirname, "..", "config", "bespoke-flows.json");
+const OUT = path.join(__dirname, "..", "db", "seed", "bespoke-flows.seed.json");
 const DRY = process.argv.includes("--dry");
 
 type Golden = Record<string, { blockCount: number; blocks: any[]; senderActions?: string[] }>;

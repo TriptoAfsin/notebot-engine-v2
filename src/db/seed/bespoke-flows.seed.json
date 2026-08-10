@@ -550,28 +550,6 @@
    }
   }
  ],
- "am1_fabric_cut_flow": [
-  {
-   "text": "🔷Fabric Cutting Hand Note(Akib, 2019)-\n        https://drive.google.com/file/d/1FQQk_UPK49vBsT9GqXHsINVg96PXJpgV/view"
-  },
-  {
-   "text": "🔷Fabric Cutting(Orpa mam, 2019)-\n        https://drive.google.com/file/d/11jXqRRPDIAVsAd7o4lTmRYx6gHnbhXX1/view?usp=sharing"
-  },
-  {
-   "text": "🔷Hand Note(Tripto, 2019)-\n        https://drive.google.com/file/d/1C2ZIxtwxm5UF8uwXJPmDL_T__3hV-Xxp/view?usp=sharing"
-  }
- ],
- "am1_intro_flow": [
-  {
-   "text": "🔷Slide-\n        https://drive.google.com/file/d/1j7VTe1cwIplbZlsId3QWacj-kR_jh8PF/view?usp=drivesdk"
-  },
-  {
-   "text": "🔷Sazid Sir Sheet - \n        https://drive.google.com/file/d/1KxyigdNUMKqsPhwmKKrPFlPQAvBmfCOy/view?usp=sharing"
-  },
-  {
-   "text": "🔷Hand Note(Tripto, 2019)-\n        https://drive.google.com/file/d/1wOEK-nmWnPyusHILT3erjb9R7leHvx4Q/view?usp=sharing"
-  }
- ],
  "am1_lab_allreport_flow": [
   {
    "text": "🔷 All Report Combined(9)-\n\nhttps://drive.google.com/file/d/1b_k7bBI3kKfAcG8xJDFjyrp2tCx576ZZ/view"
@@ -584,55 +562,6 @@
   },
   {
    "text": "🔷 All Report Combined(Samet, FE-46,2023)-\n\nhttps://drive.google.com/file/d/1bZLaMZLVG3QHkTFEu0SoDUaa_ackm31T/view?usp=sharing"
-  }
- ],
- "am1_lab_flow": [
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "📌 All Reports - ",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "All Report",
-       "payload": "am1_lab_AllReport_flow"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/101VcKHXYBgXthwDamFkOEazFeC0ESiHf/view?usp=sharing",
-       "title": "Lab Note(2023)"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1-SXyMy629efD2NP_uo3kHbNH0leV6Eq6/view?usp=sharing",
-       "title": "Hashibul(YE26)"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for AM-I -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Layout Plan",
-       "payload": "am1_lab_layoutPlan_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Standard Body Me.",
-       "payload": "am1_lab_standardBody_flow"
-      }
-     ]
-    }
-   }
   }
  ],
  "am1_lab_layoutplan_flow": [
@@ -655,11 +584,6 @@
   },
   {
    "text": "🔷 Study on Standard Body Measurement for Pants(Midul, WPE-51, 2026)-\n\nhttps://drive.google.com/file/d/1_3K4nPkdy6nKyt1j9V9j0ZKJML8BW3b8/view?usp=sharing"
-  }
- ],
- "am1_spreading_flow": [
-  {
-   "text": "🔷 Hand Note(Tripto, 2019)-\n        https://drive.google.com/file/d/1iiAMsHXDUjbx2Uh47lvBrUVmhpcZbNdw/view?usp=sharing"
   }
  ],
  "am2_lab_flow": [
@@ -1038,45 +962,6 @@
    }
   }
  ],
- "ap2_lab_flow": [
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "📌 All Reports - ",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1cTWxp54APJ0J1ElwSCzd5z-OggQ3W5qB/view?usp=sharing",
-       "title": "Naimur - 2021"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1DPt9c0tVcXOJSxpgx9gROhkzxvUNfvEe/view",
-       "title": "Nadeem - 2022"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select report for AP-II - ",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1bQivgT_8yyHaRtnMG-hjZqPYYPdrYx89/view?usp=sharing",
-       "title": "Stitch Formation(202"
-      }
-     ]
-    }
-   }
-  }
- ],
  "apprelwashing_lab_flow": [
   {
    "attachment": {
@@ -1310,71 +1195,6 @@
        "type": "web_url",
        "url": "https://drive.google.com/drive/folders/1Vxui2BB55qcUjaRzP6YcLCELUaGi751Z?usp=sharing",
        "title": "Business Proposal"
-      }
-     ]
-    }
-   }
-  }
- ],
- "bce_lab_flow": [
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "📌 All Report  - ",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "All(2022)",
-       "payload": "https://drive.google.com/file/d/1tu8slkIs7pTJ3LJseqX04l5o04NDbjDv/view?usp=sharing"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for BCE - ",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Reading Technique",
-       "payload": "bce_lab_read_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Listening Skills",
-       "payload": "bce_lab_listen_flow"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1MbHXOz7nMWNo9xIBgAaCT0pzU_2ETB93/view?usp=sharing",
-       "title": "Writing Skills"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for BCE - ",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1xyoE71MpJL0Hwn2guWsuI9mRxPJBGPas/view?usp=sharing",
-       "title": "Social English"
-      },
-      {
-       "type": "postback",
-       "title": "Lab Sheet(Final Viva",
-       "payload": "bce_lab_sheet_flow"
       }
      ]
     }
@@ -2142,149 +1962,6 @@
  "che2_lab_carboxylicidentity_flow": [
   {
    "text": "🔷Wasy(2020)-\n\nhttps://drive.google.com/file/d/1NG4xHRq5kxU5P_8S2QPZAJBN4GOJuiAN/view?usp=sharing"
-  }
- ],
- "che2_lab_flow": [
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "⚡ Procedure Sheet -",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1vc36SxJl7wF7urvEKgDfAUxvWRRRdwK6/view",
-       "title": "4-7"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1kDoK2ePtQ83cvOvxvpxt18DAxw3glAWO/view",
-       "title": "Water Hardness"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1-85nyDhEAJ4xiBWjFiboXeBLLDb4ueZk/view",
-       "title": "All Sheet"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "📌 All Combined -",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1yVJK6W4DzF696FNaw5J4enqKnBaSPk5d/view?usp=sharing",
-       "title": "Jabbar(IPE-47,2023)"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for Che-II -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Physical Pro.. Orga.",
-       "payload": "che2_lab_physicalProp_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Lassaignes Test_1",
-       "payload": "che2_lab_lassaignesTest_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Solubility Test",
-       "payload": "che2_lab_solubilityTest_flow"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for Che-II -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Alcohol Identify",
-       "payload": "che2_lab_alcoholIdentify_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Lassaignes Test_2",
-       "payload": "che2_lab_lassaignesTest2_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Strength of H2O2",
-       "payload": "che2_lab_h2o2_flow"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for Che-II -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Amount of Fe(II)",
-       "payload": "che2_lab_amountofFe2_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Carbonyl Identify",
-       "payload": "che2_lab_carbonylIdentify_flow"
-      },
-      {
-       "type": "postback",
-       "title": "-N Identify",
-       "payload": "che2_lab_Nidentity_flow"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for Che-II -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Amount of Na2CO3",
-       "payload": "che2_lab_amountna2co3_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Carboxylic Identify",
-       "payload": "che2_lab_carboxylicIdentity_flow"
-      }
-     ]
-    }
-   }
   }
  ],
  "che2_lab_h2o2_flow": [
@@ -3309,211 +2986,6 @@
   },
   {
    "text": "🔷Fan Regulator(2018)-\n\nhttps://drive.google.com/file/d/1-iXyiGs3djaCrjye2Chj8_584O3T20vT/view?usp=sharing"
-  }
- ],
- "feee_lab_flow": [
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "📌 All Reports -",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1nGS7r0MKzv7c0VSl6q1UMaI6t7KslSlW/view",
-       "title": "All(Emon)"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1pk-goLQ5kYGxhEFehYHla5Aez2Hvskmn/view?usp=sharing",
-       "title": "All(Shomir, 2022)"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1ghyG5w3r2zTSAm4_QChAqlkybixmhElr/view?usp=sharing",
-       "title": "All(Nihat, 2023)"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "📌 All Reports -",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1pDiQa_CU3u7S0OpZpdZo-OyI0tJLrPLD/view?usp=sharing",
-       "title": "All(Jabbar, 2023)"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1ZlAfl-P8lI2SZndLoV2VSWFs-09XbxUJ/view?usp=sharing",
-       "title": "All(Samet, 2023)"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1Hha84ni-NArCGLkzWZjFbttuQvLQ2Jj8/view?usp=sharing",
-       "title": "All(Faiaz, 2025)"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "📌 Lab Notes -",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1e2zAbEUZk5j7nnpxnPrxKGbxB6RRpBVs/view?usp=sharing",
-       "title": "Sazzad(2023)"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1Usj1bTo2dxOSrt6lW9CZePhnBmUH94BP/view?usp=sharing",
-       "title": "Midul(2026)"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for FEEE -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Multimetre",
-       "payload": "feee_lab_multiMetre_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Ohm's law Ve.",
-       "payload": "feee_lab_ohmslaw_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Kirchoff's law",
-       "payload": "feee_lab_kirchoffsLaw_flow"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for FEEE -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "RC Circuit",
-       "payload": "feee_lab_rcCirct_flow"
-      },
-      {
-       "type": "postback",
-       "title": "RL Circuit",
-       "payload": "feee_lab_rlCirct_flow"
-      },
-      {
-       "type": "postback",
-       "title": "RLC Circuit",
-       "payload": "feee_lab_rlcCirct_flow"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for FEEE -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Carbon Reistor",
-       "payload": "feee_lab_carbonResistor_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Fan Regulator",
-       "payload": "feee_lab_fanRegulator_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Wiring Tubelight",
-       "payload": "feee_lab_wiringTubelight_flow"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for FEEE -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Full Bridge Rect",
-       "payload": "feee_lab_fullBridgeRect_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Fuse, Switch Ckt B",
-       "payload": "feee_lab_fuseSwitch_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Study on Oscillosc.",
-       "payload": "feee_lab_Oscillosc_flow"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for FEEE -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Wire Gauge",
-       "payload": "feee_lab_wireGauge_flow"
-      },
-      {
-       "type": "postback",
-       "title": "2 Way Light Swi..",
-       "payload": "feee_lab_2waySwitch_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Study on Oscillosc.",
-       "payload": "feee_lab_Oscillosc_flow"
-      }
-     ]
-    }
-   }
   }
  ],
  "feee_lab_fullbridgerect_flow": [
@@ -4745,11 +4217,6 @@
    "text": "🔷Akib(2020)-\n\nhttps://drive.google.com/file/d/1QtpiXtyiR_XUEB0qCmZcgy8xQ7TH4gi7/view"
   }
  ],
- "fpc_degrad_flow": [
-  {
-   "text": "🔷 Hand Note(Jeba Fariha, TME-51, 2026) - \n\nhttps://drive.google.com/file/d/1Y7C6rbeGZDX_V4O7PtETXO-sSjww77bq/view?usp=sharing"
-  }
- ],
  "fsd_flow": [
   {
    "attachment": {
@@ -5468,11 +4935,6 @@
    }
   }
  ],
- "iae_quota_flow": [
-  {
-   "text": "🔷Sheet(Maruf Sir, 2020)-\n        https://drive.google.com/file/d/1J02IGYVv1UIFgiZFxrnuPxh_v5baWaPK/view?usp=sharing"
-  }
- ],
  "iee_env_issue_flow": [
   {
    "text": "🔷Sheet(Humayra Mam,2019)-\n        https://drive.google.com/file/d/1EZkGBKbUiFqCQcc7o0SyWxb0pZwkjR4L/view?usp=sharing"
@@ -5503,29 +4965,6 @@
   },
   {
    "text": "🔷Tazkia(2019)-\n        https://drive.google.com/file/d/1IvN8c5dy_umP2iqgKcpMWCzHWx1aJ1Fz/view?usp=sharing"
-  }
- ],
- "im_munirsir_flow": [
-  {
-   "text": "🔷Part A Full(Munir Sir)-\n        https://drive.google.com/file/d/1Qeb43iWOsQQ4v8cGfTjioxwWrefuqIKD/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Lec 1 (Fahim, 2019)-\n        https://drive.google.com/file/d/1E7TVQuSQc3O4yVpToUAOOgiM13QSPiqG/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Lec(1-3)(Tazkia, 2019)-\n        https://drive.google.com/file/d/1BFgUiUa7gcXr_XPOFz8sqUjxXfucR46V/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Lec 4(Tazkia, 2019)-\n        https://drive.google.com/file/d/1OMspEotF3xzA-KyiIdk2B-vMWCTNl9ZU/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Lec 3(Khalid, 2019)-\n        https://drive.google.com/file/d/14ly3lqtlEAXdPA7IvVXwmczqykQdodIP/view?usp=sharing"
-  },
-  {
-   "text": "🔷 CT 01 Munir Sir - \n        https://drive.google.com/file/d/1oNIpIBG8bswB29yd1TKvvrapvno3Dbf3/view?usp=sharing"
-  },
-  {
-   "text": "🔷 CT 02 Munir Sir - \n        https://drive.google.com/file/d/1FgKQ_fRNUEf3IqBlkZiLNv1Fmij7YI_j/view?usp=sharing"
   }
  ],
  "kint1_flow": [
@@ -8520,20 +7959,6 @@
    "text": "1. What is WebManza?  \n\nWebManza is an eCommerce solution that offers custom drag-and-drop website design and development, eCommerce functionality, inventory management, shipping and logistics to build businesses and easily manage their online presence.\n\n2. Do I need coding experience to use WebManza?  \n\n No.\n\n3. How can I onboard with WebManza?\n With WebManza, you will have your site immediately! No delay, no waiting. Visit: www.webmanza.com/store-create and complete your WebManza subscription. You will instantly get access to your admin panel to start working on your website."
   }
  ],
- "marketing_advertising_flow": [
-  {
-   "text": "🔷 Marzia Mam Sheet(2019)-\n        https://drive.google.com/file/d/1-KxXaCm62fgk2JwICYAV9Md13nDeLubN/view?usp=sharing"
-  },
-  {
-   "text": "🔷Hand Note(Akib, 2019)-\n        https://drive.google.com/file/d/1Mm1g0-dqoX8cRvnBxlNooPAi3sJ-86Md/view"
-  },
-  {
-   "text": "🔷 Hand Note(Tripto, 2019)-\n        https://drive.google.com/file/d/1ajzZRh-jl3BUYzKTDwdBS6iYYmel5Zpt/view?usp=sharing"
-  },
-  {
-   "text": "🔷Slide-\n        https://drive.google.com/file/d/1Zh7eYSv2wStkxZvRSFLx0YAdXImDZmbx/view?usp=sharing"
-  }
- ],
  "marketing_flow": [
   {
    "attachment": {
@@ -8886,11 +8311,6 @@
    "text": "🔷 Slide-\n        https://drive.google.com/file/d/1NZXn4EeL1Bn9GAIacCV-PXGZtfXWYBpZ/view?usp=sharing"
   }
  ],
- "math1_coord_solve_flow": [
-  {
-   "text": "🔷Solve 2018 - \n        https://drive.google.com/file/d/1QLoQe5PVydGJDXxDRIR6kxsnmLAbhWcz/view?usp=sharing"
-  }
- ],
  "math1_diff_solve_flow": [
   {
    "text": "🔷 Solution 2018 (Tripto)-\n\nhttps://drive.google.com/file/d/1qzyjkVhz-oVPnn7ROFRqfXauu1ULOH7H/view?usp=sharing"
@@ -9147,39 +8567,6 @@
      ]
     }
    }
-  }
- ],
- "math1_integreation_solve_flow": [
-  {
-   "text": "🔷 Solve 2018(Tanvir) -\n        https://drive.google.com/file/d/1EoSgqBS_alnWLqtxhYcrnaIjNQjPP90j/view?usp=sharing"
-  }
- ],
- "math1_linear_solve_flow": [
-  {
-   "text": "🔷 Solve(Sayem, 2019)-\n        https://drive.google.com/file/d/1hjkXwGAm8SDgOD-4IM61uf3pW1MPp2S1/view?usp=sharing"
-  },
-  {
-   "text": "🔷Solve 2018 - \n        https://drive.google.com/file/d/1vKrvC6jfwFUZ1Gknkluy6ET74Haqnvz7/view?usp=sharing"
-  },
-  {
-   "text": "🔷Solve 2018(Sayem)-\n        https://drive.google.com/file/d/1lpamesPg0hUoB7cMpRH_BBmNZb8X8hRh/view?usp=sharing"
-  }
- ],
- "math2_diffeqn_book_flow": [
-  {
-   "text": "🔷Book Scaned(Chap 7) - \n        https://drive.google.com/file/d/15ymVnfAiHR3ClO2nKDtQCSrpTuOM0O-O/view"
-  },
-  {
-   "text": "🔷Book Scanned(Chap 9)-\n        https://drive.google.com/file/d/16J0Hhji085wsaS965hAlkVPL98JJW22D/view?usp=drivesdk"
-  },
-  {
-   "text": "🔷Book Scaned(Chap 10 ) - \n        https://drive.google.com/file/d/16OPwc6MJS-FZQLFc9vv76-B2ApeJ0yA_/view"
-  },
-  {
-   "text": "🔷 Book Scaned(Chap 11 ) - \n        https://drive.google.com/file/d/16JCGgnhNC6j9BHaXVIG6ZLgD1B_AqXx3/view"
-  },
-  {
-   "text": "🔷 Book Scaned(Chap 12) - \n        https://drive.google.com/file/d/16AzpMdBD6aSXtFItfZVd1Wu4hto3Kf1S/view"
   }
  ],
  "math2_diffeqn_note_flow": [
@@ -10284,113 +9671,6 @@
    "text": "🔷CNC Milling MC(Tripto, 2019)-\n\nhttps://drive.google.com/file/d/1-CN31c5XpRRzrwS5EaNlrEzvDIksmJu1/view?usp=sharing"
   }
  ],
- "mp_lab_flow": [
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "⚡ Select Experiment for MP -",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/10k2Xuts_y8zgum2BhLCCcPdbbF4xdBDx/view",
-       "title": "General Guideline"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "📌 All Combined -",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/126Xoa2LTUKrhM1BtYXIy-VN73pYESEu7/view?usp=sharing",
-       "title": "Jabbar, 2023"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1Opk6Fa7qO9-2xpQlWXQNsKVprecO1Mf4/view?usp=sharing",
-       "title": "Himel, 2024"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for MP -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Exp 1: Lathe MC",
-       "payload": "mp_lab_lathe_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Exp3: Milling M/C",
-       "payload": "mp_lab_milling_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Exp 5:CNC Mill",
-       "payload": "mp_lab_cncMill_flow"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for MP -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Chips Temp.",
-       "payload": "mp_lab_chipsTemp_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Jack Screw",
-       "payload": "mp_lab_jackScrew_flow"
-      },
-      {
-       "type": "postback",
-       "title": "Exp 7:Inj. Mold",
-       "payload": "mp_lab_injectionMoulding_flow"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for MP -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Exp10:Sand Mold",
-       "payload": "mp_lab_sandMold_flow"
-      }
-     ]
-    }
-   }
-  }
- ],
  "mp_lab_injectionmoulding_flow": [
   {
    "text": "🔷Injection Molding M/C(Tripto, 2019)-\n\nhttps://drive.google.com/file/d/11KEhmMXFk_2IOGkIvM9xc9eiH5mGZYSq/view?usp=sharing"
@@ -11180,40 +10460,6 @@
    }
   }
  ],
- "ntf_slides_flow": [
-  {
-   "text": "🔷 Introduction to Cotton Production Process -\n\nhttps://drive.google.com/file/d/1UXD-pse1CaHeQII647dXeBlrSK8uE6L1/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Chemical Structure(Bashar Sir,2018)-\n\nhttps://drive.google.com/file/d/15S7ph9bWxnYwAcZ8uPo_hxhv6v_LTcjb/view"
-  },
-  {
-   "text": "🔷 Cotton Slide(Bashar Sir) - \n\nhttps://drive.google.com/file/d/1xx3oFFduNzW53LBWAsIaHBhgDo1HV9CF/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Cotton Ginning (Bashar Sir)-\n\nhttps://drive.google.com/file/d/1X_e0g1gnV4Vs1mb4zXYWWJa-W8R5EAPJ/view?usp=sharing"
-  },
-  {
-   "text": "🔷  Maturity of Cotton fibre (Bashar sir) - \n\nhttps://drive.google.com/file/d/14YCUMxCUL3O5VRnyhkCfYFq1zFVdxffH/view?usp=drivesdk"
-  },
-  {
-   "text": "🔷 Micro structure of cotton (Bashar sir) - \n\nhttps://drive.google.com/file/d/14kLiD9DTNvPoP9zfToHw2-tPQeq1Vxl5/view?usp=drivesdk"
-  },
-  {
-   "text": "🔷 Cotton Sheet(Masum Reza Sir)-\n\nhttps://drive.google.com/file/d/1bbtmSFE_M0KMMdG1WbUky2WBtOeFI15m/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Convolution and Maturity (Bashar sir)-\n\nhttps://drive.google.com/file/d/12gMaa4NOlUwu7RGFBKGXShGtso_08pXp/view?usp=drivesdk"
-  },
-  {
-   "text": "🔷 BT,Organic,Bd,BCI Cotton(Bashar sir)-\n\nhttps://drive.google.com/file/d/1fnz1ogkPpi-1ho9QNalDDmwCMnHbDFac/view?usp=drivesdk"
-  }
- ],
- "ntf_videos_flow": [
-  {
-   "text": "🔷Saw Ginning Process - \n        https://drive.google.com/file/d/10YTjbjyRa-EMTDbnDBYnJNO7OjxkO3MI/view"
-  }
- ],
  "ntf_wool_hand_flow": [
   {
    "text": "🔷 Hand Note(Fardin,AE-50,2025)-\n\nhttps://drive.google.com/file/d/1_OnECZQQ9AeKPEt_XPQjLAMock0-ZiGF/view?usp=sharing"
@@ -11235,40 +10481,6 @@
   },
   {
    "text": "🔷 Hand Note(Nafis,IPE-46,2022)-\n\nhttps://drive.google.com/file/d/1rTF8qlpO6cfqTBEBZPCVBCGtXm40nWsG/view?usp=sharing"
-  }
- ],
- "ntf_wool_slides_flow": [
-  {
-   "text": "🔷 Tonima Mam Slide(2018) - \n        https://drive.google.com/file/d/1uDsjG-jPgXs4Z3J17uuE0RJALZi2UaYO/view?usp=sharing"
-  },
-  {
-   "text": "🔷Toufiqa Mam Slide -\n        https://drive.google.com/file/d/1axKs-XlIBwiiMowaxAfFZ-8TxlmowLKd/view?usp=sharing"
-  },
-  {
-   "text": "🔷Wool (Textile science-Gohl) -\n        https://drive.google.com/file/d/17DLjYBVcCs9Q8sXYVyq5gg5YW7NUzdG1/view?usp=drivesdk"
-  },
-  {
-   "text": "🔷 Slide -\n        https://drive.google.com/file/d/1oaVp8JNao32NYFy7WeOnOgieiFeqWiFI/view?usp=sharing"
-  }
- ],
- "ntf_wool_videos_flow": [
-  {
-   "text": "🔷Video of Wool Production -\n        https://drive.google.com/file/d/1nZ_98g_yAQRTtobRAO6K-hvsDtVK6Xoj/view?usp=sharing"
-  }
- ],
- "om_ch1_flow": [
-  {
-   "text": "🔷 Hand Note(ফৌজিয়া,TEM-44,2021) - \n\nhttps://drive.google.com/file/d/1vaBtXc7z7hm-RJ-8O3WzsXntD09Xh8l8/view?usp=sharing"
-  }
- ],
- "om_ch2_flow": [
-  {
-   "text": "🔷 Hand Note(ফৌজিয়া,TEM-44,2021) - \n\nhttps://drive.google.com/file/d/12l4yZtGdNPvxpWdg8q7xNehc1VZSJwl6/view?usp=sharing"
-  }
- ],
- "om_ch3_flow": [
-  {
-   "text": "🔷 Hand Note(ফৌজিয়া,TEM-44,2021) - \n\nhttps://drive.google.com/file/d/1Yq3SZlfkY6ee_W7O2ckGT1Jt6Cw_lvDk/view?usp=sharing"
   }
  ],
  "online_2_1": [
@@ -11690,26 +10902,6 @@
   },
   {
    "text": "🔷 Hand Note(Kayes, BHETI, 2019)-\n\nhttps://drive.google.com/file/d/1ml1hLE1Ev32p0bCiIV9X5jJjpjUeInrg/view?usp=sharing"
-  }
- ],
- "phy2_electric_slides_flow": [
-  {
-   "text": "🔷Hasina Mam's  Sheet(Lecture - 1)  -\n        https://drive.google.com/file/d/1onDod3lDT0VjJVTgTYMp7XkOW3i9ZBBd/view?usp=sharing"
-  },
-  {
-   "text": "🔷Hasina Mam's  Sheet(Lecture -2) -\n        https://drive.google.com/file/d/1IlKzNRS6o2XIIM8pxlqPwV6uI0OakCLd/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Hasina Mam's  Sheet(Lecture - 3)  -\n        https://drive.google.com/file/d/1lkGvOKI6_OBBLFcNu6zF53O16Ci09v66/view?usp=sharing"
-  },
-  {
-   "text": "🔷Hasina Mam's  Sheet (Lecture - 4) -\n        https://drive.google.com/file/d/1zKAV_hQNugdxWbk-xJnff0Z334d34ZcZ/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Hasina Mam's  Sheet (Lecture -5) -\n        https://drive.google.com/file/d/1lKJyMPeSZQRYmX9Jsk0h_nR2yKuVVaKp/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Hasina Mam's  Sheet (Lecture - 6) -\n        https://drive.google.com/file/d/1trjQEU0gUBeiRdLG29IDh1fle0fZ1Lwt/view?usp=sharing"
   }
  ],
  "phy2_electricity_flow": [
@@ -12356,45 +11548,6 @@
    "text": "🔷M1 (Nova, 2020)-\n        https://drive.google.com/file/d/1hqEtwNWB3849Lw7kEwiBXflmY1BD98Aq/view?usp=sharing"
   }
  ],
- "pm1_lab_flow": [
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "📌 All Report - ",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1YzdrSXyfI5a5UCfSfzQ8qYvV58eK_GQ-/view?usp=sharing",
-       "title": "Miftahul(2023)"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1q3yr4FxMuk2JYg2IFhMmaaNVivOwQQRh/view?usp=sharing",
-       "title": "Mashtura(2023)"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for PM-I -",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/19yGc9Uedsv6XlRsWfPmoIrVtyLLKMi-Q/view",
-       "title": "Exp: 1"
-      }
-     ]
-    }
-   }
-  }
- ],
  "pm2labflow": [
   {
    "attachment": {
@@ -12437,14 +11590,6 @@
      ]
     }
    }
-  }
- ],
- "pse_fiberforming_flow": [
-  {
-   "text": "🔷 Hand Note(Raiyan,FE-48, 2024) - \n\nhttps://drive.google.com/file/d/13qyhzvBGoLCrxRDhPaYb9sS4MGjNYIPx/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Hand Note(Borhan,AE-46, 2021) - \n\nhttps://drive.google.com/file/d/12vYYpI5IEzFSDF45ZCoDqjLhv_bG7FN2/view?usp=sharing"
   }
  ],
  "pse_flow": [
@@ -12984,66 +12129,6 @@
        "type": "web_url",
        "url": "https://drive.google.com/file/d/1Fi8P78FO-spX77Gd5RPv7gdinEgOe_CF/view",
        "title": "3,1"
-      }
-     ]
-    }
-   }
-  }
- ],
- "sss1_lab_flow": [
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "⚡ All Combined -",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1ZOmIEOTbjsWVrQCkU3KXFrgd_ecklGtZ/view?usp=sharing",
-       "title": "Hashibul(2025)"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1p94aeElV-IAPWwxScOSqpKjUdrEjFfcr/view?usp=sharing",
-       "title": "Mridul(2025)"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "⚡ All Combined -",
-     "buttons": [
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1VGqGhvh7pj_x_IlOzyr_n-EYvu-tK92q/view?usp=sharing",
-       "title": "Sanjana(2023)"
-      },
-      {
-       "type": "web_url",
-       "url": "https://drive.google.com/file/d/1zwRYYJMPrBBumhtinFjxsTL9ecT11jrq/view?usp=sharing",
-       "title": "Shuchi"
-      }
-     ]
-    }
-   }
-  },
-  {
-   "attachment": {
-    "type": "template",
-    "payload": {
-     "template_type": "button",
-     "text": "🔰 Select Experiment for SSS-I -",
-     "buttons": [
-      {
-       "type": "postback",
-       "title": "Layout Plan",
-       "payload": "sss1_lab_layoutPlan_flow"
       }
      ]
     }
@@ -15168,14 +14253,6 @@
   },
   {
    "text": "🔷 Hand Note(Akib,AE-44, 2020)-\n\nhttps://drive.google.com/file/d/1UPi7wTIl2DCOgM9JXpES_7RwgMOO4MSc/view?usp=sharing"
-  }
- ],
- "weav_books_flow": [
-  {
-   "text": "🔷 Weaving Preparation Technology(Dr. N.Gokarneshan)-\n\nhttps://drive.google.com/file/d/1qLO7surUEvTDFWZ8OvjySXrVvdAxyeHn/view?usp=sharing"
-  },
-  {
-   "text": "🔷 Weaving (Dr. M.K Talukdar)-\n\nhttps://drive.google.com/file/d/10ItoNxXWQ9yW2-z718gB8q2u39ysUvcL/view?usp=sharing"
   }
  ],
  "weav_prep_flow": [

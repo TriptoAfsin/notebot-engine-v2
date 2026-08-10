@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 
 import { getDb } from "db/index";
-import { getStaticFlow } from "config/static-flows";
+import { getBotFlow } from "services/chatbot/bot-flow.service";
 import {
   Button, buttonGroups, postbackButton, textBlock, webButton,
 } from "utils/messenger-blocks";
@@ -50,10 +50,11 @@ export async function resolvePayload(
 
   const key = norm(raw);
 
-  // 1. Static flows: help text, donation details, top-level menus, human handoff.
+  // 1. Bespoke flows from the `bot_flows` table: help text, donation details, top-level menus,
+  //    partner cards. Read from the database so the CMS can edit them without a deploy.
   if (!opts.skipBespoke) {
-    const staticFlow = getStaticFlow(key) ?? getStaticFlow(stripFlow(key));
-    if (staticFlow) return staticFlow;
+    const botFlow = (await getBotFlow(key)) ?? (await getBotFlow(stripFlow(key)));
+    if (botFlow) return botFlow;
   }
 
   // 2. A topic — the single largest family.
@@ -198,6 +199,31 @@ async function resolveStructural(key: string): Promise<Block[] | null> {
     return rows.map((r) => noteText(r.title, r.url));
   }
 
+  // l1t2routine -> level 1, "Term 2". v1 encodes level and term in the payload; the routines table
+  // stores the term as free text ("Term 2"), so match on the trailing digit rather than the label.
+  const levelTerm = key.match(/^l(\d)[_-]?t(\d)[_-]?routine$/);
+  if (levelTerm) {
+    const { rows } = await db.execute<{ title: string; url: string }>(sql`
+      SELECT r.title, r.url FROM routines r
+      JOIN levels l ON l.id = r.level_id
+      WHERE lower(l.slug) = ${levelTerm[1]}
+        AND regexp_replace(COALESCE(r.term, ''), '\\D', '', 'g') = ${levelTerm[2]}
+      ORDER BY r.sort_order, r.id
+    `);
+    if (rows.length) return rows.map((r) => noteText(r.title, r.url));
+  }
+
+  // syllabus_ipe45 -> batch 45, department ipe. v1 packs department and batch into one token.
+  const deptBatch = key.match(/^syllabus[_-]?([a-z]+)(\d{2})$/);
+  if (deptBatch) {
+    const { rows } = await db.execute<{ topic: string; url: string }>(sql`
+      SELECT topic, url FROM syllabuses
+      WHERE batch = ${deptBatch[2]} AND lower(department) = ${deptBatch[1]}
+      ORDER BY department_sort, id
+    `);
+    if (rows.length) return rows.map((r) => noteText(r.topic, r.url));
+  }
+
   // level_1 / 1 -> that level's subjects
   const level = key.match(/^level[_-]?(\d)$/) ?? key.match(/^(\d)$/);
   if (level) return renderLevel(level[1]);
@@ -237,8 +263,25 @@ async function renderLevel(levelSlug: string): Promise<Block[] | null> {
     ORDER BY s.sort_order, s.display_name
   `);
   if (!rows.length) return null;
-  const buttons = rows.map((s) => postbackButton(s.display_name, `${s.slug}_flow`));
-  return buttonGroups(`🔰 Select subject — Level ${levelSlug} -`, buttons);
+
+  const blocks: Block[] = buttonGroups(
+    `🔰 Select subject — Level ${levelSlug} -`,
+    rows.map((s) => postbackButton(s.display_name, `${s.slug}_flow`))
+  );
+
+  // v1's level page also carries that level's question-bank folders. They are their own table, so
+  // without this they were only reachable from the separate QB menu.
+  const { rows: qb } = await db.execute<{ title: string; url: string }>(sql`
+    SELECT q.title, q.url FROM question_banks q
+    JOIN levels l ON l.id = q.level_id
+    WHERE lower(l.slug) = ${levelSlug}
+    ORDER BY q.sort_order, q.id
+  `);
+  if (qb.length) {
+    blocks.push(...buttonGroups(`🟪 Question banks — Level ${levelSlug} -`, qb.map((q) => webButton(q.title, q.url))));
+  }
+
+  return blocks;
 }
 
 async function renderLabLevel(levelSlug: string): Promise<Block[] | null> {
@@ -280,16 +323,20 @@ export async function resolveLabPayload(payload: string): Promise<Block[] | null
   const db = getDb();
   const key = stripFlow(norm(payload));
 
-  // `<subject>_lab` -> that subject's lab topics
+  // `<subject>_lab` -> every lab report for that subject.
+  //
+  // Matched on the slug with punctuation removed, because v1's payload and the lab row disagree on
+  // it: `wp2_lab_flow` against a `subject_slug` of `wp_2`, `am2` against `am_2`. Returning the
+  // reports directly rather than another menu also saves a tap — v1 made you pick a topic first.
   const subjectOnly = key.match(/^(.+?)[_-]lab$/);
   if (subjectOnly) {
-    const { rows } = await db.execute<{ topic_name: string }>(sql`
-      SELECT DISTINCT topic_name FROM lab_reports
-      WHERE lower(subject_slug) = ${subjectOnly[1]} ORDER BY topic_name
+    const bare = subjectOnly[1].replace(/[^a-z0-9]/g, "");
+    const { rows } = await db.execute<{ topic_name: string; title: string; url: string }>(sql`
+      SELECT topic_name, title, url FROM lab_reports
+      WHERE regexp_replace(lower(subject_slug), '[^a-z0-9]', '', 'g') = ${bare}
+      ORDER BY topic_name, sort_order, id
     `);
-    if (!rows.length) return null;
-    const buttons = rows.map((r) => postbackButton(r.topic_name, `${subjectOnly[1]}_${r.topic_name}`));
-    return buttonGroups(`🧪 ${subjectOnly[1].toUpperCase()} lab reports -`, buttons);
+    if (rows.length) return rows.map((r) => noteText(r.title, r.url));
   }
 
   // `<subject>_<topic>` — split on the first underscore and match the remainder as the topic,

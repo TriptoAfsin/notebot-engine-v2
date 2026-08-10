@@ -38,7 +38,7 @@ const router = express.Router();
  *             properties:
  *               scope:
  *                 type: string
- *                 enum: [all, level, subject, topic, labs, syllabus, routines, results]
+ *                 enum: [all, level, subject, topic, labs, syllabus, routines, results, botflows]
  *               id:
  *                 type: integer
  *                 description: required for level | subject | topic | labs
@@ -93,6 +93,11 @@ router.post("/admin/cache/flush", requireApiKey, async (req: Request, res: Respo
       case "results":
         await del("results");
         await delPattern("scraped-results:*");
+        break;
+      case "botflows":
+        // The bot's bespoke flows. Editing one in the CMS must reach the running bot, and every
+        // postback consults this cache, so it is held in-process too — see bot-flow.service.ts.
+        await del("botflows:all");
         break;
       default:
         res.status(400).json({ error: `unknown scope "${scope}"` });

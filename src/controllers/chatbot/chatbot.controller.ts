@@ -4,14 +4,14 @@ import { chatBotIntroService } from "services/chatbot/chatbot.service";
 import { replyForQuery } from "services/chatbot/search-reply.service";
 import { resolvePayload } from "services/chatbot/flow.service";
 import { keywordStats, matchKeywords } from "services/chatbot/keyword.service";
-import { staticFlowCount } from "config/static-flows";
+import { botFlowCount } from "services/chatbot/bot-flow.service";
 import type { SenderAction } from "utils/messenger-blocks";
 
 export const testMsg = async (req: Request, res: Response) => {
     const introRes = await chatBotIntroService(req);
     // Surface what the bot can actually answer, so a deploy that lost its rule tables is visible
     // here rather than only when a student taps something.
-    return res.send({ ...introRes, flows: { bespoke: staticFlowCount(), ...keywordStats() } });
+    return res.send({ ...introRes, flows: { bespoke: await botFlowCount(), ...keywordStats() } });
 };
 
 export const getWebhook = (req: Request, res: Response) => {
