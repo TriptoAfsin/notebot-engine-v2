@@ -5,6 +5,7 @@ import { replyForQuery } from "services/chatbot/search-reply.service";
 import { resolvePayload } from "services/chatbot/flow.service";
 import { keywordStats, matchKeywords } from "services/chatbot/keyword.service";
 import { botFlowCount } from "services/chatbot/bot-flow.service";
+import { passToHuman, takeBackFromHuman, wantsBotBack } from "services/chatbot/handoff.service";
 import type { SenderAction } from "utils/messenger-blocks";
 
 export const testMsg = async (req: Request, res: Response) => {
@@ -43,6 +44,26 @@ export const postWebhook = async (req: Request, res: Response) => {
         res.status(200).send("EVENT_RECEIVED");
 
         for (const entry of body.entry ?? []) {
+            // While the Page Inbox holds a thread, this app receives `standby` instead of
+            // `messaging` and must not reply — only watch for the user asking for the bot back.
+            // Without this the bot appears dead to anyone waiting on a human, with no way out.
+            if (entry.standby) {
+                for (const standbyEvent of entry.standby) {
+                    const psid = standbyEvent.sender?.id;
+                    if (!psid) continue;
+                    if (wantsBotBack(standbyEvent.message?.text)) {
+                        try {
+                            await takeBackFromHuman(psid);
+                            const welcome = await resolvePayload("GET_STARTED");
+                            if (welcome?.length) await sendAll(psid, welcome);
+                        } catch (err) {
+                            console.error("standby handover failed", err);
+                        }
+                    }
+                }
+                continue;
+            }
+
             // Every event, not just messaging[0]. Meta batches events into this array, so reading
             // only the first silently drops the rest — v1 has the same bug at
             // chatbotController.js:1761, which is why bursts of messages go unanswered there.
@@ -115,6 +136,22 @@ async function handlePostback(senderPsid: string, receivedPostback: any) {
 
     await mark(senderPsid, "mark_seen");
     await mark(senderPsid, "typing_on");
+
+    // Handover is an API call, not a block of text, so it cannot come from the flow table. Reply
+    // first, then pass control — after the handover this app stops receiving the user's messages.
+    if (/^talk[_-]?to[_-]?human$/i.test(payload)) {
+        const blocks = (await resolvePayload(payload)) ?? [
+            { text: "A person will get in touch with you 😁" },
+        ];
+        await sendAll(senderPsid, blocks);
+        const passed = await passToHuman(senderPsid);
+        if (!passed) {
+            await sendAll(senderPsid, [
+                { text: "I could not reach a person just now 😔 — please try again in a little while." },
+            ]);
+        }
+        return;
+    }
 
     const blocks = await resolvePayload(payload);
     if (blocks?.length) return sendAll(senderPsid, blocks);
