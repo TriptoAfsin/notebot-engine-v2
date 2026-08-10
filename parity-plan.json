@@ -1,0 +1,835 @@
+{
+ "generatedFrom": "v1-crawl.json",
+ "topicRelabel": [
+  {
+   "id": 1101,
+   "where": "/app/notes/1/math1/coordsolve",
+   "from": "coOrdSolve",
+   "to": "Co Ord Solve",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1102,
+   "where": "/app/notes/1/math1/diffsolve",
+   "from": "diffSolve",
+   "to": "Diff Solve",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1103,
+   "where": "/app/notes/1/math1/integrationsolve",
+   "from": "integrationSolve",
+   "to": "Integration Solve",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1104,
+   "where": "/app/notes/1/math1/linearsolve",
+   "from": "linearSolve",
+   "to": "Linear Solve",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1106,
+   "where": "/app/notes/1/math2/diffeqnbook",
+   "from": "diffeqnBook",
+   "to": "Diffeqn Book",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1107,
+   "where": "/app/notes/1/math2/diffeqnnote",
+   "from": "diffEqnNote",
+   "to": "Diff Eqn Note",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1109,
+   "where": "/app/notes/1/ntf/cottonnotes",
+   "from": "cottonNotes",
+   "to": "Cotton Notes",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1110,
+   "where": "/app/notes/1/ntf/cottonslides",
+   "from": "cottonSlides",
+   "to": "Cotton Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1111,
+   "where": "/app/notes/1/ntf/cottonvideos",
+   "from": "cottonVideos",
+   "to": "Cotton Videos",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1112,
+   "where": "/app/notes/1/ntf/woolnotes",
+   "from": "woolNotes",
+   "to": "Wool Notes",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1113,
+   "where": "/app/notes/1/ntf/woolslides",
+   "from": "woolSlides",
+   "to": "Wool Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1114,
+   "where": "/app/notes/1/ntf/woolvideos",
+   "from": "woolVideos",
+   "to": "Wool Videos",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1117,
+   "where": "/app/notes/1/phy2/electricnotes",
+   "from": "electricNotes",
+   "to": "Electric Notes",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1118,
+   "where": "/app/notes/1/phy2/electricslides",
+   "from": "electricSlides",
+   "to": "Electric Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1149,
+   "where": "/app/notes/3/econo/econobooks",
+   "from": "econoBooks",
+   "to": "Econo Books",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1150,
+   "where": "/app/notes/3/econo/econoclasslec",
+   "from": "econoClassLec",
+   "to": "Econo Class Lec",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1154,
+   "where": "/app/notes/3/im/immaeen",
+   "from": "imMaeen",
+   "to": "Im Maeen",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1155,
+   "where": "/app/notes/3/im/immunir",
+   "from": "imMunir",
+   "to": "Im Munir",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1161,
+   "where": "/app/notes/3/om/ch1omflow",
+   "from": "ch1OmFlow",
+   "to": "Ch1 Om Flow",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1162,
+   "where": "/app/notes/3/om/ch2omflow",
+   "from": "ch2OMFlow",
+   "to": "Ch2 OM Flow",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1163,
+   "where": "/app/notes/3/om/ch3omflow",
+   "from": "ch3OMFlow",
+   "to": "Ch3 OM Flow",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 1297,
+   "where": "/app/notes/1/phy2/englishsongs",
+   "from": "English Songs",
+   "to": "Youtube Playlist",
+   "reason": "english-songs-mislabel"
+  },
+  {
+   "id": 1350,
+   "where": "/app/notes/2/eee/englishsongs",
+   "from": "English Songs",
+   "to": "YouTube Playlist",
+   "reason": "english-songs-mislabel"
+  },
+  {
+   "id": 1469,
+   "where": "/app/notes/2/tp/englishsongs",
+   "from": "English Songs",
+   "to": "YouTube Playlist",
+   "reason": "english-songs-mislabel"
+  },
+  {
+   "id": 1483,
+   "where": "/app/notes/2/ttqc/englishsongs",
+   "from": "English Songs",
+   "to": "Youtube Link",
+   "reason": "english-songs-mislabel"
+  },
+  {
+   "id": 1548,
+   "where": "/app/notes/3/acm/englishsongs",
+   "from": "English Songs",
+   "to": "46,2024)",
+   "reason": "english-songs-mislabel"
+  },
+  {
+   "id": 1602,
+   "where": "/app/notes/3/economics/englishsongs",
+   "from": "English Songs",
+   "to": "46,2024)",
+   "reason": "english-songs-mislabel"
+  },
+  {
+   "id": 1623,
+   "where": "/app/notes/3/fm2/englishsongs",
+   "from": "English Songs",
+   "to": "Youtube Playlist",
+   "reason": "english-songs-mislabel"
+  },
+  {
+   "id": 1644,
+   "where": "/app/notes/3/fsd/englishsongs",
+   "from": "English Songs",
+   "to": "Watch 📺",
+   "reason": "english-songs-mislabel"
+  },
+  {
+   "id": 1840,
+   "where": "/app/notes/4/ppc/englishsongs",
+   "from": "English Songs",
+   "to": "Rafi(2025)",
+   "reason": "english-songs-mislabel"
+  }
+ ],
+ "noteRelabel": [
+  {
+   "id": 1577,
+   "where": "/app/notes/1/ecb/ecbhandnote",
+   "from": "� Fatema Mam's Lecture(Shajneen, 2020)",
+   "to": "🔵 Fatema Mam's Lecture(Shajneen, 2020)",
+   "reason": "mojibake"
+  },
+  {
+   "id": 1578,
+   "where": "/app/notes/1/ecb/ecbintro",
+   "from": "�Sheet(Shuvo Sir)",
+   "to": "🔵Sheet(Shuvo Sir)",
+   "reason": "mojibake"
+  },
+  {
+   "id": 925,
+   "where": "/app/notes/1/math1/math1linear",
+   "from": "� Video Lecture(Sajjatul, FE-50,2025)",
+   "to": "📺 Video Lecture(Sajjatul, FE50,2025)",
+   "reason": "mojibake"
+  },
+  {
+   "id": 1312,
+   "where": "/app/notes/1/phy2/phy2magnet",
+   "from": "� Short Note (Sabiha,TFD-45, 2021)",
+   "to": "🔶 Short Note (Sabiha,TFD45, 2021)",
+   "reason": "mojibake"
+  },
+  {
+   "id": 2403,
+   "where": "/app/notes/1/chem1/chem1dilu",
+   "from": "chem1Dilu",
+   "to": "Depression of Fre",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2467,
+   "where": "/app/notes/1/math1/coordsolve",
+   "from": "coOrdSolve",
+   "to": "Co Ord Solve",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2468,
+   "where": "/app/notes/1/math1/diffsolve",
+   "from": "diffSolve",
+   "to": "🔷 Solution 2018 (Tripto)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2469,
+   "where": "/app/notes/1/math1/diffsolve",
+   "from": "diffSolve",
+   "to": "🔷 Solution 2018",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2470,
+   "where": "/app/notes/1/math1/diffsolve",
+   "from": "diffSolve",
+   "to": "🔷 Solution 2018 (Abir)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2471,
+   "where": "/app/notes/1/math1/integrationsolve",
+   "from": "integrationSolve",
+   "to": "Integration Solve",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2472,
+   "where": "/app/notes/1/math1/linearsolve",
+   "from": "linearSolve",
+   "to": "Linear Solve",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2473,
+   "where": "/app/notes/1/math1/linearsolve",
+   "from": "linearSolve",
+   "to": "Linear Solve",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2474,
+   "where": "/app/notes/1/math1/linearsolve",
+   "from": "linearSolve",
+   "to": "Linear Solve",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2482,
+   "where": "/app/notes/1/math2/diffeqnbook",
+   "from": "diffeqnBook",
+   "to": "Diffeqn Book",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2483,
+   "where": "/app/notes/1/math2/diffeqnbook",
+   "from": "diffeqnBook",
+   "to": "Diffeqn Book",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2484,
+   "where": "/app/notes/1/math2/diffeqnbook",
+   "from": "diffeqnBook",
+   "to": "Diffeqn Book",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2485,
+   "where": "/app/notes/1/math2/diffeqnbook",
+   "from": "diffeqnBook",
+   "to": "Diffeqn Book",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2486,
+   "where": "/app/notes/1/math2/diffeqnbook",
+   "from": "diffeqnBook",
+   "to": "Diffeqn Book",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2519,
+   "where": "/app/notes/1/ntf/cottonvideos",
+   "from": "cottonVideos",
+   "to": "Cotton Videos",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2522,
+   "where": "/app/notes/1/ntf/ntfjute",
+   "from": "ntfJute",
+   "to": "2nd Part",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2523,
+   "where": "/app/notes/1/ntf/ntfjute",
+   "from": "ntfJute",
+   "to": "4th Part",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2526,
+   "where": "/app/notes/1/ntf/ntfsilk",
+   "from": "ntfSilk",
+   "to": "Slide",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2534,
+   "where": "/app/notes/1/ntf/woolslides",
+   "from": "woolSlides",
+   "to": "Wool Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2535,
+   "where": "/app/notes/1/ntf/woolslides",
+   "from": "woolSlides",
+   "to": "Wool Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2536,
+   "where": "/app/notes/1/ntf/woolslides",
+   "from": "woolSlides",
+   "to": "Wool Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2537,
+   "where": "/app/notes/1/ntf/woolslides",
+   "from": "woolSlides",
+   "to": "Wool Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2538,
+   "where": "/app/notes/1/ntf/woolvideos",
+   "from": "woolVideos",
+   "to": "Wool Videos",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2571,
+   "where": "/app/notes/1/phy2/electricslides",
+   "from": "electricSlides",
+   "to": "Electric Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2572,
+   "where": "/app/notes/1/phy2/electricslides",
+   "from": "electricSlides",
+   "to": "Electric Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2573,
+   "where": "/app/notes/1/phy2/electricslides",
+   "from": "electricSlides",
+   "to": "Electric Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2574,
+   "where": "/app/notes/1/phy2/electricslides",
+   "from": "electricSlides",
+   "to": "Electric Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2575,
+   "where": "/app/notes/1/phy2/electricslides",
+   "from": "electricSlides",
+   "to": "Electric Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2576,
+   "where": "/app/notes/1/phy2/electricslides",
+   "from": "electricSlides",
+   "to": "Electric Slides",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2579,
+   "where": "/app/notes/1/phy2/phy2electric",
+   "from": "phy2Electric",
+   "to": "Phy2 Electric",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2580,
+   "where": "/app/notes/1/phy2/phy2electric",
+   "from": "phy2Electric",
+   "to": "B(2023)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2677,
+   "where": "/app/notes/2/marketing/marketnotes",
+   "from": "marketNotes",
+   "to": "B2",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2870,
+   "where": "/app/notes/3/econo/econobooks",
+   "from": "econoBooks",
+   "to": "🔷Intermediate Micro Economics(Hal R. Varian)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2871,
+   "where": "/app/notes/3/econo/econobooks",
+   "from": "econoBooks",
+   "to": "🔷Macro Economics(N. Gregory Mankiw)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2872,
+   "where": "/app/notes/3/econo/econoclasslec",
+   "from": "econoClassLec",
+   "to": "🔷 Lec(14)(Khalid, 2019)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2873,
+   "where": "/app/notes/3/econo/econoclasslec",
+   "from": "econoClassLec",
+   "to": "🔷 Lec(14)(Arman, 2019)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2874,
+   "where": "/app/notes/3/econo/econoclasslec",
+   "from": "econoClassLec",
+   "to": "🔷Lec(57)(Arman, 2019)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2875,
+   "where": "/app/notes/3/econo/econoclasslec",
+   "from": "econoClassLec",
+   "to": "🔷Lec(89)(Arman, 2019)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2876,
+   "where": "/app/notes/3/econo/econoclasslec",
+   "from": "econoClassLec",
+   "to": "🔷 Lec(1011)(Arman, 2019)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2877,
+   "where": "/app/notes/3/econo/econoclasslec",
+   "from": "econoClassLec",
+   "to": "🔷Eti Mam",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2926,
+   "where": "/app/notes/3/im/immaeen",
+   "from": "imMaeen",
+   "to": "🔷PartB Full Maeen Sir(2019)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2927,
+   "where": "/app/notes/3/im/immaeen",
+   "from": "imMaeen",
+   "to": "🔷Market(Fahim, 2019)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2928,
+   "where": "/app/notes/3/im/immaeen",
+   "from": "imMaeen",
+   "to": "🔷Chapter 3(fahim, 2019)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2929,
+   "where": "/app/notes/3/im/immaeen",
+   "from": "imMaeen",
+   "to": "🔷Tazkia(2019)",
+   "reason": "slug->v1"
+  },
+  {
+   "id": 2930,
+   "where": "/app/notes/3/im/immunir",
+   "from": "imMunir",
+   "to": "Im Munir",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2931,
+   "where": "/app/notes/3/im/immunir",
+   "from": "imMunir",
+   "to": "Im Munir",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2932,
+   "where": "/app/notes/3/im/immunir",
+   "from": "imMunir",
+   "to": "Im Munir",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2933,
+   "where": "/app/notes/3/im/immunir",
+   "from": "imMunir",
+   "to": "Im Munir",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2934,
+   "where": "/app/notes/3/im/immunir",
+   "from": "imMunir",
+   "to": "Im Munir",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2935,
+   "where": "/app/notes/3/im/immunir",
+   "from": "imMunir",
+   "to": "Im Munir",
+   "reason": "slug->humanized"
+  },
+  {
+   "id": 2936,
+   "where": "/app/notes/3/im/immunir",
+   "from": "imMunir",
+   "to": "Im Munir",
+   "reason": "slug->humanized"
+  }
+ ],
+ "emptyTopics": [
+  {
+   "id": 669,
+   "where": "/app/notes/1/cp/suggestioncp",
+   "displayName": "suggestion Cp"
+  },
+  {
+   "id": 860,
+   "where": "/app/notes/2/ttqc/ttqcbooks",
+   "displayName": "ttqc Books"
+  },
+  {
+   "id": 974,
+   "where": "/app/notes/3/economics/appecobooks",
+   "displayName": "app Eco Books"
+  },
+  {
+   "id": 975,
+   "where": "/app/notes/3/economics/appeconoclasslec",
+   "displayName": "app Econo Class Lec"
+  },
+  {
+   "id": 1859,
+   "where": "/app/notes/1/IAE/iae_quota_flow",
+   "displayName": "Quota & Cate.."
+  },
+  {
+   "id": 1869,
+   "where": "/app/notes/1/pse/pse_fiberforming_flow",
+   "displayName": "Fiber For. Poly."
+  },
+  {
+   "id": 1871,
+   "where": "/app/notes/2/am1/am1_intro_flow",
+   "displayName": "Intro"
+  },
+  {
+   "id": 1872,
+   "where": "/app/notes/2/am1/am1_spreading_flow",
+   "displayName": "Spreading"
+  },
+  {
+   "id": 1873,
+   "where": "/app/notes/2/am1/am1_fabric_cut_flow",
+   "displayName": "Fabric Cutting"
+  },
+  {
+   "id": 1880,
+   "where": "/app/notes/2/marketing/marketing_advertising_flow",
+   "displayName": "dvertising,Sales.."
+  },
+  {
+   "id": 1885,
+   "where": "/app/notes/2/weaving_prep/weav_books_flow",
+   "displayName": "Books"
+  },
+  {
+   "id": 1891,
+   "where": "/app/notes/3/im/im_lec1_flow",
+   "displayName": "Lec 1: Intro to IM"
+  }
+ ],
+ "duplicateTopics": [],
+ "missingResources": [
+  {
+   "v1Path": "/app/labs/2/am1",
+   "label": "📌 All Reports - Hashibul(YE26)",
+   "url": "https://drive.google.com/file/d/1-SXyMy629efD2NP_uo3kHbNH0leV6Eq6/view?usp=sharing",
+   "key": "f:1-SXyMy629efD2NP_uo3kHbNH0leV6Eq6"
+  },
+  {
+   "v1Path": "/app/labs/2/am1/am1_lab_standardBody_flow",
+   "label": "🔷 Study on Standard Body Measurement(Midul, WPE51, 2026)",
+   "url": "https://drive.google.com/file/d/1-OfJmj0iseLcDIYMJUbmxN7OH4TXzALk/view?usp=sharing",
+   "key": "f:1-OfJmj0iseLcDIYMJUbmxN7OH4TXzALk"
+  },
+  {
+   "v1Path": "/app/labs/2/am1/am1_lab_standardBody_flow",
+   "label": "🔷 Study on Standard Body Measurement for Pants(Midul, WPE51, 2026)",
+   "url": "https://drive.google.com/file/d/1_3K4nPkdy6nKyt1j9V9j0ZKJML8BW3b8/view?usp=sharing",
+   "key": "f:1_3K4nPkdy6nKyt1j9V9j0ZKJML8BW3b8"
+  },
+  {
+   "v1Path": "/app/labs/2/feee",
+   "label": "Midul(2026)",
+   "url": "https://drive.google.com/file/d/1Usj1bTo2dxOSrt6lW9CZePhnBmUH94BP/view?usp=sharing",
+   "key": "f:1Usj1bTo2dxOSrt6lW9CZePhnBmUH94BP"
+  },
+  {
+   "v1Path": "/app/labs/2/fm1/fm1_lab_layout_flow",
+   "label": "🔷Hand Note(Midul Hasan, WPE51, 2026)",
+   "url": "https://drive.google.com/file/d/18zSH2bvj2NH4e69DacJ2jtiy5klVLByO/view?usp=sharing",
+   "key": "f:18zSH2bvj2NH4e69DacJ2jtiy5klVLByO"
+  },
+  {
+   "v1Path": "/app/labs/2/fm1/fm1_lab_package_flow",
+   "label": "🔷Packages(Midul, WPE51, 2026)",
+   "url": "https://drive.google.com/file/d/17AiKSh15MpUaxFxmuZTp0GvFTkvA87y2/view?usp=sharing",
+   "key": "f:17AiKSh15MpUaxFxmuZTp0GvFTkvA87y2"
+  },
+  {
+   "v1Path": "/app/labs/2/sss2",
+   "label": "📌 All Reports -Hashibul(YE26)",
+   "url": "https://drive.google.com/file/d/1-mPQ2Win_QPRqam0SBaNrH9DpWptyeDQ/view?usp=sharing",
+   "key": "f:1-mPQ2Win_QPRqam0SBaNrH9DpWptyeDQ"
+  },
+  {
+   "v1Path": "/app/labs/2/sss2",
+   "label": "📌 All Reports -Mridul(YE,2026)",
+   "url": "https://drive.google.com/drive/folders/1xLCECBIoqnq9hGtrJ0PXdPz_BVgq9Vp7",
+   "key": "d:1xLCECBIoqnq9hGtrJ0PXdPz_BVgq9Vp7"
+  },
+  {
+   "v1Path": "/app/labs/3/fsd",
+   "label": "Tahin(TEM,2026)",
+   "url": "https://drive.google.com/drive/folders/1a2U-oa6CCaJF4EPSJQgnMikG7d3N54X9",
+   "key": "d:1a2U-oa6CCaJF4EPSJQgnMikG7d3N54X9"
+  },
+  {
+   "v1Path": "/app/labs/3/fsd",
+   "label": "Israt(2026)",
+   "url": "https://drive.google.com/file/d/1FwEoIXrRRAxw_HTlUdyhDzcbfNnpaSjT/view?usp=sharing",
+   "key": "f:1FwEoIXrRRAxw_HTlUdyhDzcbfNnpaSjT"
+  },
+  {
+   "v1Path": "/app/labs/3/mic",
+   "label": "📌 All Reports -Israt(2026)",
+   "url": "https://drive.google.com/file/d/1qteGZ-f2nzr_jElqM1nw1VR-IlPMU3kQ/view?usp=sharing",
+   "key": "f:1qteGZ-f2nzr_jElqM1nw1VR-IlPMU3kQ"
+  },
+  {
+   "v1Path": "/app/labs/3/pm2",
+   "label": "📌 All Reports -Tahin(TEM308)",
+   "url": "https://drive.google.com/drive/folders/1LX3L7X0h_gkNx_0aV7BJhYemfRhOCeTB",
+   "key": "d:1LX3L7X0h_gkNx_0aV7BJhYemfRhOCeTB"
+  },
+  {
+   "v1Path": "/app/labs/3/ym2",
+   "label": "📌 All Reports -Afnan(WPE,2026)",
+   "url": "https://drive.google.com/file/d/1qWE8EOW3zYpNFwA35RRGd9U80xJzDOGY/view?usp=sharing",
+   "key": "f:1qWE8EOW3zYpNFwA35RRGd9U80xJzDOGY"
+  },
+  {
+   "v1Path": "/app/labs/3/ym2",
+   "label": "📌 All Reports -Tahin(TEM,2026)",
+   "url": "https://drive.google.com/drive/folders/1ikSiwvjq_z9WW3HBfAcGsagVMEDNin2m",
+   "key": "d:1ikSiwvjq_z9WW3HBfAcGsagVMEDNin2m"
+  },
+  {
+   "v1Path": "/app/notes/2/fm1",
+   "label": "📌 Full Notes -Fardin(AE,26)",
+   "url": "https://drive.google.com/drive/folders/1O0gRDJUqLb6ac0ywfbmD1irPNl98vETk",
+   "key": "d:1O0gRDJUqLb6ac0ywfbmD1irPNl98vETk"
+  },
+  {
+   "v1Path": "/app/notes/2/mmtf",
+   "label": "📌 Full Notes -Mridul(YE)PartB",
+   "url": "https://drive.google.com/drive/folders/1MFVTqrunhjvJttyxTfUdp8665HdEvist",
+   "key": "d:1MFVTqrunhjvJttyxTfUdp8665HdEvist"
+  },
+  {
+   "v1Path": "/app/notes/2/spe",
+   "label": "📌 Full Notes -Fardin(AE,26)",
+   "url": "https://drive.google.com/drive/folders/1Wfu6aZbOT-cYpUSb4sBfheOVttySUQvU",
+   "key": "d:1Wfu6aZbOT-cYpUSb4sBfheOVttySUQvU"
+  },
+  {
+   "v1Path": "/app/notes/2/ym1",
+   "label": "📌 Full Notes -Fardin(AE,26)",
+   "url": "https://drive.google.com/drive/folders/1GoOgn8ja_i_hOURhb4LBonqjF0KVY5zb",
+   "key": "d:1GoOgn8ja_i_hOURhb4LBonqjF0KVY5zb"
+  },
+  {
+   "v1Path": "/app/notes/3",
+   "label": "UM",
+   "url": "https://drive.google.com/drive/folders/1v_0wmUeF3vh45cy6Jmi-tGTh-4nQUE8F?usp=sharing",
+   "key": "d:1v_0wmUeF3vh45cy6Jmi-tGTh-4nQUE8F"
+  },
+  {
+   "v1Path": "/app/notes/3",
+   "label": "SCM",
+   "url": "https://drive.google.com/drive/folders/1Fo5gmLOcep6JABUt6FJiVSda0MA4DFbW?usp=sharing",
+   "key": "d:1Fo5gmLOcep6JABUt6FJiVSda0MA4DFbW"
+  },
+  {
+   "v1Path": "/app/notes/3/ap2",
+   "label": "📌 Full Notes -Fardin(AE,26)",
+   "url": "https://drive.google.com/drive/folders/12k818j4kIEfe_FnCNX6X5pVYW3K0sZkW",
+   "key": "d:12k818j4kIEfe_FnCNX6X5pVYW3K0sZkW"
+  },
+  {
+   "v1Path": "/app/notes/3/ietex",
+   "label": "📌 Full Notes -Lamia(IPE,26)",
+   "url": "https://drive.google.com/drive/folders/1VXcDcV0950x3DKByz7O-4mcenXT-FOCo",
+   "key": "d:1VXcDcV0950x3DKByz7O-4mcenXT-FOCo"
+  },
+  {
+   "v1Path": "/app/notes/4/bele",
+   "label": "📌 Full Notes -Shahed(TEM,26)",
+   "url": "https://drive.google.com/drive/folders/1SCIitNzpjG5vw7NtNXILqUOAZo5wyeqs",
+   "key": "d:1SCIitNzpjG5vw7NtNXILqUOAZo5wyeqs"
+  },
+  {
+   "v1Path": "/app/notes/4/epd",
+   "label": "📌 Full Notes -Shahed(TEM,26)",
+   "url": "https://drive.google.com/drive/folders/1jP1LMAgckB6RgssNyazoWkLelokZYf62",
+   "key": "d:1jP1LMAgckB6RgssNyazoWkLelokZYf62"
+  },
+  {
+   "v1Path": "/app/notes/4/sociology",
+   "label": "📌 Full Notes -Shahed(TEM,26)",
+   "url": "https://drive.google.com/drive/folders/1ZmTUnOE2MlVBJfaQWMgSKAHh2JwxJp1V",
+   "key": "d:1ZmTUnOE2MlVBJfaQWMgSKAHh2JwxJp1V"
+  },
+  {
+   "v1Path": "/app/notes/4/tam",
+   "label": "📌 Full Notes -Shahed(TEM,26)",
+   "url": "https://drive.google.com/drive/folders/1A64kkVecceIvzwCEY1uJcLijJxDZ103h",
+   "key": "d:1A64kkVecceIvzwCEY1uJcLijJxDZ103h"
+  }
+ ],
+ "stats": {
+  "topicRelabel": 30,
+  "noteRelabel": 55,
+  "emptyTopics": 12,
+  "missingResources": 26,
+  "byReason": {
+   "slug->humanized": 51,
+   "english-songs-mislabel": 9,
+   "mojibake": 4,
+   "slug->v1": 21
+  }
+ }
+}

@@ -1,6 +1,9 @@
 export const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 export const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 export const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
+// Used to verify Meta's X-Hub-Signature-256 on webhook deliveries. Unset means the webhook is
+// rejected in production rather than trusting unsigned events.
+export const FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET;
 export const SECONDARY_RECEIVER_ID = process.env.SECONDARY_RECEIVER_ID;
 export const DATABASE_PUBLIC_URL = process.env.DATABASE_PUBLIC_URL;
 export const REDIS_URL = process.env.REDIS_URL;

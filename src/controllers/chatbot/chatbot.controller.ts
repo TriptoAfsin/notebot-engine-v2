@@ -36,20 +36,32 @@ export const postWebhook = async (req: Request, res: Response) => {
     const body = req.body;
 
     if (body.object === "page") {
-        for (const entry of body.entry) {
-            const webhookEvent = entry.messaging?.[0];
-            if (!webhookEvent) continue;
+        // Acknowledge before doing the work. Meta retries on anything slower than ~20s or
+        // non-200, and a slow Send API call would otherwise turn one message into duplicates.
+        res.status(200).send("EVENT_RECEIVED");
 
-            const senderPsid = webhookEvent.sender.id;
+        for (const entry of body.entry ?? []) {
+            // Every event, not just messaging[0]. Meta batches events into this array, so reading
+            // only the first silently drops the rest — v1 has the same bug at
+            // chatbotController.js:1761, which is why bursts of messages go unanswered there.
+            for (const webhookEvent of entry.messaging ?? []) {
+                const senderPsid = webhookEvent.sender?.id;
+                if (!senderPsid) continue;
 
-            if (webhookEvent.message) {
-                await handleMessage(senderPsid, webhookEvent.message);
-            } else if (webhookEvent.postback) {
-                await handlePostback(senderPsid, webhookEvent.postback);
+                try {
+                    if (webhookEvent.message) {
+                        await handleMessage(senderPsid, webhookEvent.message);
+                    } else if (webhookEvent.postback) {
+                        await handlePostback(senderPsid, webhookEvent.postback);
+                    }
+                } catch (err) {
+                    // One bad event must not abandon the others in the same batch.
+                    console.error("webhook event failed", err);
+                }
             }
         }
 
-        res.status(200).send("EVENT_RECEIVED");
+        return;
     } else {
         res.sendStatus(404);
     }

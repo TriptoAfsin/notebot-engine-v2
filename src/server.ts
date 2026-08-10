@@ -14,7 +14,16 @@ import { errorHandler } from "middlewares/error-handler";
 import { swaggerSpec } from "config/swagger";
 
 const setupMiddlewares = async (app: Application) => {
-  app.use(bodyParser.json());
+  // Meta signs the raw bytes of a webhook delivery, and a parsed-then-re-serialised object will not
+  // reproduce that digest (key order and whitespace differ). Keep the raw buffer so
+  // verifyWebhookSignature can HMAC exactly what Meta signed.
+  app.use(
+    bodyParser.json({
+      verify: (req, _res, buf) => {
+        (req as express.Request & { rawBody?: Buffer }).rawBody = buf;
+      },
+    })
+  );
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(
     cors({
