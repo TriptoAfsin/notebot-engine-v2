@@ -1,6 +1,7 @@
 import { MY_VERIFY_TOKEN, PAGE_ACCESS_TOKEN, GRAPH_API_URL } from "constants/secrets";
 import { Request, Response } from "express";
 import { chatBotIntroService } from "services/chatbot/chatbot.service";
+import { replyForQuery } from "services/chatbot/search-reply.service";
 
 export const testMsg = async (req: Request, res: Response) => {
     const introRes = await chatBotIntroService(req);
@@ -62,8 +63,13 @@ async function handleMessage(senderPsid: string, receivedMessage: any) {
         const payload = receivedMessage.quick_reply.payload;
         response = { text: `Quick reply received: ${payload}` };
     } else if (receivedMessage.text) {
-        // Echo the message back
-        response = { text: `You said: "${receivedMessage.text}"` };
+        // Free text is treated as a search. On a miss replyForQuery returns v1's default
+        // suggestion reply, so the bot never answers with silence or a bare "no results".
+        const blocks = await replyForQuery(receivedMessage.text);
+        for (const block of blocks) {
+            await callSendAPI(senderPsid, block);
+        }
+        return;
     }
 
     if (response) {

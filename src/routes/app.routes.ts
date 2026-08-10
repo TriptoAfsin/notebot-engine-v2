@@ -1,6 +1,7 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import appController from "controllers/app/app.controller";
 import jokesController from "controllers/app/jokes.controller";
+import { searchService } from "services/app/search.service";
 
 const router = express.Router();
 
@@ -283,5 +284,70 @@ router.get("/app/jokes", jokesController.getRandomJoke);
  *         description: Query is required
  */
 router.post("/app/tex-gpt", appController.texGptSearch);
+
+/**
+ * @swagger
+ * /app/search:
+ *   get:
+ *     tags: [App]
+ *     summary: Search notes and lab reports
+ *     description: >
+ *       Ranked free-text search across note titles, lab report titles and their topic/subject
+ *       names. Returns at most `limit` hits (default 5). Responds 404 with
+ *       `{ "error": "Not found" }` when nothing matches, so a client can show its own empty
+ *       state rather than an empty list that looks like a loading bug.
+ *     parameters:
+ *       - in: query
+ *         name: q
+ *         required: true
+ *         schema: { type: string }
+ *         description: Search text; needs at least 2 characters
+ *       - in: query
+ *         name: limit
+ *         schema: { type: integer, default: 5, maximum: 20 }
+ *     responses:
+ *       200:
+ *         description: Ranked hits
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 query: { type: string }
+ *                 count: { type: integer }
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       kind: { type: string, enum: [note, lab] }
+ *                       title: { type: string }
+ *                       url: { type: string }
+ *                       subject: { type: string }
+ *                       topic: { type: string }
+ *                       level: { type: string }
+ *                       route: { type: string, nullable: true }
+ *       400: { description: Missing or too-short query }
+ *       404: { description: Nothing matched }
+ */
+router.get("/app/search", async (req: Request, res: Response) => {
+  try {
+    const q = String(req.query.q ?? "").trim();
+    if (q.length < 2) {
+      res.status(400).json({ error: "Query must be at least 2 characters" });
+      return;
+    }
+    const limit = Math.min(20, Math.max(1, parseInt(String(req.query.limit ?? "5"), 10) || 5));
+    const results = await searchService.search(q, limit);
+
+    if (results.length === 0) {
+      res.status(404).json({ error: "Not found", query: q, results: [] });
+      return;
+    }
+    res.json({ query: q, count: results.length, results });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 export default router;
