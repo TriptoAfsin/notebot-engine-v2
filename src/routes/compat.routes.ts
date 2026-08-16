@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { noteService } from "services/app/note.service";
 import { labService } from "services/app/lab.service";
 import { scrapeResultsService } from "services/app/scrape-results.service";
+import { scheduleService } from "services/app/schedule.service";
 import { syllabusService } from "services/app/syllabus.service";
 import { analyticsService } from "services/app/analytics.service";
 
@@ -544,6 +545,50 @@ router.get("/results", async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     res.status(500).json({ msg: "Internal server error while processing results" });
+  }
+});
+
+/**
+ * @swagger
+ * /schedules:
+ *   get:
+ *     tags: [Compat]
+ *     summary: Get the latest class routines and exam schedules
+ *     description: >
+ *       Sourced from the BUTEX site's WordPress REST API (not scraped HTML).
+ *       Same envelope as /results so clients can reuse one model.
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Number of schedules to return
+ *     responses:
+ *       200:
+ *         description: Schedules with href, content, date
+ */
+router.get("/schedules", async (req: Request, res: Response) => {
+  try {
+    const limit = parseInt(req.query.limit as string) || 10;
+    const schedules = await scheduleService.getSchedules(limit);
+
+    if (!schedules || schedules.length === 0) {
+      res
+        .status(404)
+        .json({ msg: "No schedules found or error while getting schedules" });
+      return;
+    }
+
+    res.json({
+      msg: `Here are the last ${schedules.length} schedules`,
+      data: schedules,
+    });
+  } catch (err: any) {
+    res
+      .status(500)
+      .json({ msg: "Internal server error while processing schedules" });
   }
 });
 
