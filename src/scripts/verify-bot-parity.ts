@@ -12,6 +12,9 @@
 import "dotenv/config";
 import fs from "fs";
 
+import { sql } from "drizzle-orm";
+
+import { getDb } from "db/index";
 import { resolvePayload } from "services/chatbot/flow.service";
 import { matchKeywords } from "services/chatbot/keyword.service";
 import { LIMITS } from "utils/messenger-blocks";
@@ -60,7 +63,14 @@ async function main() {
   const golden: Golden = JSON.parse(fs.readFileSync(GOLDEN, "utf8"));
   const payloads = Object.keys(golden);
 
-  let live = 0, answered = 0, silent = 0, deadInV1 = 0;
+  // A flow an editor switched off in the CMS is meant to answer nothing. Counting that as a broken
+  // button would leave this gate permanently red, and a gate that always fails gets ignored.
+  const { rows: disabledRows } = await getDb().execute<{ payload: string }>(
+    sql`SELECT lower(payload) AS payload FROM bot_flows WHERE enabled = false`
+  );
+  const disabled = new Set(disabledRows.map((r) => r.payload));
+
+  let live = 0, answered = 0, silent = 0, deadInV1 = 0, silencedOnPurpose = 0;
   const silentList: string[] = [];
   const violations: Array<{ payload: string; issues: string[] }> = [];
 
@@ -69,7 +79,10 @@ async function main() {
     live++;
 
     const blocks = await resolvePayload(payload);
-    if (!blocks?.length) { silent++; silentList.push(payload); continue; }
+    if (!blocks?.length) {
+      if (disabled.has(payload.toLowerCase())) { silencedOnPurpose++; continue; }
+      silent++; silentList.push(payload); continue;
+    }
     answered++;
 
     const issues = limitViolations(blocks);
@@ -80,6 +93,7 @@ async function main() {
   console.log(`  v1 answers nothing (dead buttons) : ${deadInV1}`);
   console.log(`  live payloads                     : ${live}`);
   console.log(`  answered by v2                    : ${answered}`);
+  console.log(`  disabled in the CMS (intended)    : ${silencedOnPurpose}`);
   console.log(`  ANSWERED BY NOTHING              : ${silent}`);
   if (silentList.length) console.log(`    ${silentList.slice(0, 10).join(", ")}`);
 
@@ -133,7 +147,34 @@ async function main() {
   if (regressions.length) console.log(`    ${regressions.slice(0, 12).join(", ")}`);
   console.log(`  (a fall-through now runs search before the default reply)`);
 
-  const ok = silent === 0 && regressions.length === 0 && violations.length === 0;
+  // ---- frozen snapshots ----
+  //
+  // A compat route that answers from a snapshot on the row instead of the content tables makes every
+  // later edit invisible. That is how 46 lab subjects stayed frozen for months while notes were
+  // clean: the earlier gate only asserted the notes case (subjects.metadata), and the lab snapshots
+  // live on levels.metadata. Assert on both, by shape, so a new snapshot key cannot hide here either.
+  const { rows: frozen } = await getDb().execute<{ where: string; key: string; n: number }>(sql`
+    SELECT 'subjects' AS "where", k AS key, COUNT(*)::int AS n
+      FROM subjects, jsonb_object_keys(COALESCE(metadata, '{}'::jsonb)) k
+     WHERE k LIKE 'v1%' GROUP BY 1, 2
+    UNION ALL
+    SELECT 'levels', k, COUNT(*)::int
+      FROM levels, jsonb_object_keys(COALESCE(metadata, '{}'::jsonb)) k
+     WHERE k LIKE 'v1Lab%' GROUP BY 1, 2
+    ORDER BY 1, 2
+  `);
+  const blocking = frozen.filter((f) => /Topics|Leaves/.test(f.key));
+
+  console.log("\n── frozen snapshots ──────────────────────────");
+  if (blocking.length === 0) {
+    console.log("  none — every compat route reads the content tables");
+  } else {
+    for (const f of blocking) console.log(`  ${f.where}.metadata.${f.key} on ${f.n} row(s)   <- edits here are invisible`);
+  }
+  const other = frozen.filter((f) => !/Topics|Leaves/.test(f.key));
+  if (other.length) console.log(`  (informational: ${other.map((f) => `${f.where}.${f.key}=${f.n}`).join(", ")})`);
+
+  const ok = silent === 0 && regressions.length === 0 && violations.length === 0 && blocking.length === 0;
   console.log(`\n${ok ? "PASS" : "FAIL"} — every live payload and keyword answers, within Meta's limits`);
   process.exit(ok ? 0 : 1);
 }
