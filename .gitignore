@@ -35,3 +35,8 @@ tmpclaude-*
 # Regenerable reports from the bot parity scripts (the rule tables in src/config are not).
 /payload-parity.json
 /payload-coverage.json
+
+# Reports from the lab-blob migration scripts (regenerable).
+/lab-blob-plan.json
+/lab-parity.json
+/lab-blobs-backup.json

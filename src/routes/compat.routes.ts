@@ -418,11 +418,18 @@ router.get(
 
       const labTopics = await labService.getLabTopicsBySubject(level.id, dbSlug);
 
+      // v1 emits {topic, url} for a direct web button and {topic, route} for a drill-down. Emitting
+      // route for everything - as this did - cost students a tap on 196 links and showed internal
+      // keys instead of v1's labels.
       res.json(
-        labTopics.map((t) => ({
-          topic: t.topicName,
-          route: `app/labs/${levelSlug}/${v1SubjectSlug}/${t.topicName}`,
-        }))
+        labTopics.map((t) =>
+          t.url
+            ? { topic: t.display, url: t.url }
+            : {
+                topic: t.display,
+                route: `app/labs/${levelSlug}/${v1SubjectSlug}/${encodeURIComponent(t.topicName)}`,
+              }
+        )
       );
     } catch (err: any) {
       res.status(500).json({ error: err.message });
