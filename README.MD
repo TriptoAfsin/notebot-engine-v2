@@ -4,7 +4,7 @@ Backend API server for BUTEX NoteBot - serves academic notes, lab reports, quest
 
 ## Tech Stack
 
-- **Runtime:** Node.js + TypeScript
+- **Runtime:** Bun (runs TypeScript directly, no build step)
 - **Framework:** Express.js
 - **Database:** PostgreSQL (via Drizzle ORM)
 - **Cache:** Redis (via ioredis)
@@ -14,16 +14,16 @@ Backend API server for BUTEX NoteBot - serves academic notes, lab reports, quest
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Copy env file and fill in values
 cp .env.example .env
 
 # Run database migrations
-npx drizzle-kit push
+bunx drizzle-kit push
 
 # Start development server
-npm run dev
+bun run dev
 ```
 
 The server runs on `http://localhost:8969` by default.
@@ -91,17 +91,17 @@ src/
 ## Scripts
 
 ```bash
-npm run dev       # Start with nodemon (hot reload)
-npm run start     # Start in production mode
+bun run dev       # Start with bun --watch (hot reload)
+bun run start     # Start in production mode
 ```
 
 ### Utility Scripts
 
 ```bash
-npx tsx src/scripts/migrate-v1-data.ts    # Migrate data from V1
-npx tsx src/scripts/sync-v1-compat.ts     # Sync V1 API responses for compat layer
-npx tsx src/scripts/flush-cache.ts        # Clear all Redis cache
-npx tsx src/scripts/seed.ts               # Seed initial data
+bun src/scripts/migrate-v1-data.ts    # Migrate data from V1
+bun src/scripts/sync-v1-compat.ts     # Sync V1 API responses for compat layer
+bun src/scripts/flush-cache.ts        # Clear all Redis cache
+bun src/scripts/seed.ts               # Seed initial data
 ```
 
 ### Contact me at: <a href="mailto:afsintripto@gmail.com">AfsinTripto@gmail.com</a>

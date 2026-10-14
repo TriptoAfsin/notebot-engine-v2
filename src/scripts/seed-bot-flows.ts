@@ -7,7 +7,7 @@
  * Idempotent — re-running upserts by payload, so it can be used to refresh after regenerating the
  * residual with `bot:build-flows`.
  *
- * Run: npx ts-node --transpile-only -r tsconfig-paths/register src/scripts/seed-bot-flows.ts [--prune]
+ * Run: bun src/scripts/seed-bot-flows.ts [--prune]
  *   --prune  also deletes rows whose payload is no longer in the JSON (i.e. now DB-resolvable)
  */
 import "dotenv/config";

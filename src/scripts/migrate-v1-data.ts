@@ -1,7 +1,7 @@
 /**
  * Migration script: notebot-engine-v1 -> notebot-engine-v2 (Postgres)
  *
- * Usage: npx tsx src/scripts/migrate-v1-data.ts <path-to-v1-repo>
+ * Usage: bun src/scripts/migrate-v1-data.ts <path-to-v1-repo>
  *
  * Reads ALL v1 data and inserts into the v2 Postgres database.
  */
@@ -888,7 +888,7 @@ const v1Path = process.argv[2];
 
 if (!v1Path) {
   console.error(
-    "Usage: npx tsx src/scripts/migrate-v1-data.ts <path-to-v1-repo>"
+    "Usage: bun src/scripts/migrate-v1-data.ts <path-to-v1-repo>"
   );
   process.exit(1);
 }

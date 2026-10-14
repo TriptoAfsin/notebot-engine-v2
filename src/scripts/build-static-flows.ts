@@ -10,7 +10,7 @@
  * The residual shrinks on its own as content moves into the database; nothing has to be pruned by
  * hand, and a flow can never be served twice from two places.
  *
- * Run: npx ts-node --transpile-only -r tsconfig-paths/register src/scripts/build-static-flows.ts
+ * Run: bun src/scripts/build-static-flows.ts
  *      [--golden <path>] [--dry]
  */
 import "dotenv/config";

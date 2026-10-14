@@ -8,7 +8,7 @@
  *   - **misfiled** — the URL is in v2, but under something the payload does not resolve to. A
  *     wiring problem, fixable without touching content.
  *
- * Run: npx ts-node --transpile-only -r tsconfig-paths/register src/scripts/audit-bespoke-gap.ts
+ * Run: bun src/scripts/audit-bespoke-gap.ts
  */
 import "dotenv/config";
 import fs from "fs";

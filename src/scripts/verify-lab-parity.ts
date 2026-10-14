@@ -11,7 +11,7 @@
  * A subject passes when every URL the blob exposes is still reachable and the direct-link/drill-down
  * split matches. Labels are reported separately: a label difference is cosmetic, a missing URL is not.
  *
- * Run: npx ts-node --transpile-only -r tsconfig-paths/register src/scripts/verify-lab-parity.ts
+ * Run: bun src/scripts/verify-lab-parity.ts
  */
 import "dotenv/config";
 import fs from "fs";

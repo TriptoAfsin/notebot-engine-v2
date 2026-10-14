@@ -14,8 +14,7 @@
  *
  * Writes `metadata.v1RouteSlug` only, and only when the match is unambiguous. Dry by default.
  *
- * Run: npx ts-node --transpile-only -r tsconfig-paths/register \
- *        src/scripts/backfill-v1-route-slugs.ts [--apply]
+ * Run: bun src/scripts/backfill-v1-route-slugs.ts [--apply]
  */
 import "dotenv/config";
 import fs from "fs";
@@ -157,7 +156,7 @@ async function main() {
     written++;
   }
   console.log(`\nwrote v1RouteSlug on ${written} topics (${plan.length - written} dropped as duplicate claims)`);
-  console.log("now re-run: npm run bot:build-flows && npm run bot:verify");
+  console.log("now re-run: bun run bot:build-flows && bun run bot:verify");
   process.exit(0);
 }
 

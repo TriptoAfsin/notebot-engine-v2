@@ -2,7 +2,7 @@
  * Supplementary migration: Add missing direct-URL subjects and lab display name mappings.
  * These items are "shortcut" links from v1 that don't have topics underneath them.
  *
- * Usage: npx ts-node --transpile-only -r tsconfig-paths/register src/scripts/fix-compat-data.ts
+ * Usage: bun src/scripts/fix-compat-data.ts
  */
 
 import { Pool } from "pg";

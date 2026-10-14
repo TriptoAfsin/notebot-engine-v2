@@ -11,7 +11,7 @@
  * `labSubjects` is kept: compat still maps a v1 route slug to a DB slug through it.
  * The removed blobs are written to lab-blobs-backup.json first.
  *
- * Run: npx ts-node --transpile-only -r tsconfig-paths/register src/scripts/drop-lab-blobs.ts [--apply]
+ * Run: bun src/scripts/drop-lab-blobs.ts [--apply]
  */
 import "dotenv/config";
 import fs from "fs";

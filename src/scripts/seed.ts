@@ -1,7 +1,7 @@
 /**
  * Seed script: Populate the database with sample data for testing.
  *
- * Usage: npx ts-node -r tsconfig-paths/register src/scripts/seed.ts
+ * Usage: bun src/scripts/seed.ts
  */
 
 import dotenv from "dotenv";

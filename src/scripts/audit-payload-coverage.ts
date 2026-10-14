@@ -6,7 +6,7 @@
  * the payloads are already addressable in the DB, which is what this measures before any code is
  * written against the assumption.
  *
- * Run: npx ts-node --transpile-only -r tsconfig-paths/register src/scripts/audit-payload-coverage.ts
+ * Run: bun src/scripts/audit-payload-coverage.ts
  */
 import "dotenv/config";
 import fs from "fs";

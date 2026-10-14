@@ -5,9 +5,9 @@
  * Every write is idempotent — a second run reports zero changes — and every row
  * it touches is dumped to parity-backup-<ts>.json first.
  *
- *   npx tsx src/scripts/build-v1-title-map.ts <v1-repo>   # produces v1-title-map.json
- *   npx tsx src/scripts/repair-parity.ts                  # dry run
- *   npx tsx src/scripts/repair-parity.ts --apply
+ *   bun src/scripts/build-v1-title-map.ts <v1-repo>   # produces v1-title-map.json
+ *   bun src/scripts/repair-parity.ts                  # dry run
+ *   bun src/scripts/repair-parity.ts --apply
  *
  * Where each defect lives, and therefore how it is fixed:
  *   /app/notes/* is served from topics+notes rows  -> UPDATE/INSERT/DELETE rows

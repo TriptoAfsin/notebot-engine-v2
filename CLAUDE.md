@@ -4,20 +4,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**NoteBot Engine v2** — the next-gen backend for the BUTEX (Bangladesh University of Textiles) NoteBot. A Node.js/TypeScript/Express API backed by **PostgreSQL (Drizzle ORM)** and **Redis (ioredis)**. It replaces the flat JS-file content model of `notebot-engine-v1` with a relational database, while a **compat layer** keeps serving the exact v1 response shape so the existing Messenger bot and mobile app keep working during the migration.
+**NoteBot Engine v2** — the next-gen backend for the BUTEX (Bangladesh University of Textiles) NoteBot. A Bun/TypeScript/Express API backed by **PostgreSQL (Drizzle ORM)** and **Redis (ioredis)**. It replaces the flat JS-file content model of `notebot-engine-v1` with a relational database, while a **compat layer** keeps serving the exact v1 response shape so the existing Messenger bot and mobile app keep working during the migration.
 
 The sibling v1 repo (`notebot-engine-v1`, a separate checkout) is still live; v2 is being brought to parity and both are dual-written for a transition window.
 
 ## Commands
 
-- `npm run dev` — Start dev server with nodemon + ts-node (hot reload)
-- `npm start` — Production start (`ts-node --transpile-only -r tsconfig-paths/register src/server.ts`)
-- `npx drizzle-kit push` — Apply schema to the database
-- `npx drizzle-kit generate` — Generate SQL migrations from schema
+- `bun install` — Install dependencies (lockfile is `bun.lock`)
+- `bun run dev` — Start dev server with `bun --watch` (hot reload)
+- `bun start` — Production start (`bun src/server.ts`; Bun runs the TypeScript directly)
+- `bun run typecheck` — `tsc --noEmit` (Bun does not type-check at runtime)
+- `bunx drizzle-kit push` — Apply schema to the database
+- `bunx drizzle-kit generate` — Generate SQL migrations from schema
 - No test suite exists (`npm test` is a placeholder)
 - Server default port: **8969**. Swagger UI at **`/api-docs`**.
 
-### Utility scripts (run with `npx tsx src/scripts/<file>.ts`)
+### Utility scripts (run with `bun src/scripts/<file>.ts`)
 
 - `migrate-v1-data.ts <path-to-v1-repo>` — One-time bulk import of ALL v1 content into Postgres. Parses v1 title strings for metadata (year, batch, department, term) via `extractMetadata()`.
 - `sync-v1-compat.ts` — Calls the **running v1 API** (expects v1 on `http://localhost:6969`) and stores its responses as `metadata` on v2 subjects/levels/topics so the compat layer can return byte-identical v1 output. Matches v1↔v2 topics by **URL overlap** (≥50%).
@@ -34,7 +36,7 @@ The sibling v1 repo (`notebot-engine-v1`, a separate checkout) is still live; v2
 
 ### Path aliases
 
-`tsconfig.json` sets `baseUrl` to `src`, so imports are bare from `src/` — e.g. `import { getDb } from "db/index"`, `import appRoutes from "routes/app.routes"`. Runtime resolution is via `tsconfig-paths/register` (already in the start script). **Match this style — do not use long relative `../../` chains.**
+`tsconfig.json` sets `baseUrl` to `src`, so imports are bare from `src/` — e.g. `import { getDb } from "db/index"`, `import appRoutes from "routes/app.routes"`. Bun resolves these natively from `tsconfig.json`. **Match this style — do not use long relative `../../` chains.**
 
 ### Two API surfaces
 

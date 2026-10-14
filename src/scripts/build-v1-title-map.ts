@@ -6,7 +6,7 @@
  * reconciler that seeded v2 read them straight off disk. Those files are the
  * only surviving source for the titles the reconciler dropped.
  *
- * Usage: npx tsx src/scripts/build-v1-title-map.ts <path-to-v1-repo>
+ * Usage: bun src/scripts/build-v1-title-map.ts <path-to-v1-repo>
  */
 import * as fs from "fs";
 import * as path from "path";

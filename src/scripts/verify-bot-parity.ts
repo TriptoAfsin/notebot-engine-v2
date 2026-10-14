@@ -7,7 +7,7 @@
  *
  * Also checks the free-text side: every keyword v1 recognises must still route somewhere.
  *
- * Run: npx ts-node --transpile-only -r tsconfig-paths/register src/scripts/verify-bot-parity.ts
+ * Run: bun src/scripts/verify-bot-parity.ts
  */
 import "dotenv/config";
 import fs from "fs";

@@ -3,7 +3,7 @@
  * implementation returned. Compares /app/syllabus, /app/syllabus/:batch and
  * /app/syllabus/:batch/:dept payloads against the dataset recovered from git.
  *
- *   npx ts-node --transpile-only -r tsconfig-paths/register src/scripts/verify-syllabus-parity.ts
+ *   bun src/scripts/verify-syllabus-parity.ts
  */
 import { execSync } from "child_process";
 import { syllabusService } from "services/app/syllabus.service";

@@ -17,7 +17,7 @@
  *
  * Writes nothing without --apply.
  *
- * Run: npx ts-node --transpile-only -r tsconfig-paths/register src/scripts/import-lab-blobs.ts [--apply]
+ * Run: bun src/scripts/import-lab-blobs.ts [--apply]
  */
 import "dotenv/config";
 import fs from "fs";
