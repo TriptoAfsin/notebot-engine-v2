@@ -105,3 +105,7 @@ bun src/scripts/seed.ts               # Seed initial data
 ```
 
 ### Contact me at: <a href="mailto:afsintripto@gmail.com">AfsinTripto@gmail.com</a>
+
+## Support NoteBot
+
+NoteBot has been free for every BUTEX student since 2018, and it stays that way. If it helped you through an exam, you can help keep it running on [Patreon](https://www.patreon.com/triptex). Support pays for the servers, the bots and app store fees.
